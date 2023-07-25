@@ -2,7 +2,7 @@ package tests;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -32,7 +32,7 @@ public abstract class BaseTest {
         if (browserName.equals("chrome")) {
             driver = new ChromeDriver();
         } else if (browserName.equals("firefox")) {
-            driver = new SafariDriver();
+            driver = new FirefoxDriver();
         } else {
             throw new Exception("Unsupported browser");
         }
