@@ -17,13 +17,14 @@ public abstract class BaseTest {
     protected static final String BASE_URL = PropertyReader.getProperty("base_url");
     protected static final String USERNAME = PropertyReader.getProperty("username");
     protected static final String PASSWORD = PropertyReader.getProperty("password");
+    protected static final String ERROR_USERNAME = "raptorkost@gmal.com";
+    protected static final String ERROR_PASSWORD = "12345";
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected SignInPage signInPage;
     protected LoginPage loginPage;
-    protected DashboardPage dashboardPage;
-    protected CreateNewRepositoryPage createNewRepositoryPage;
+    protected ProjectsPage projectsPage;
+    protected CreateNewProjectPage createNewProjectPage;
 
 
     @Parameters({"browserName"})
@@ -39,10 +40,9 @@ public abstract class BaseTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         context.setAttribute("driver", driver);
-        signInPage = new SignInPage(driver);
         loginPage = new LoginPage(driver);
-        dashboardPage = new DashboardPage(driver);
-        createNewRepositoryPage = new CreateNewRepositoryPage(driver);
+        projectsPage = new ProjectsPage(driver);
+        createNewProjectPage = new CreateNewProjectPage(driver);
     }
 
     @AfterClass(alwaysRun = true)
