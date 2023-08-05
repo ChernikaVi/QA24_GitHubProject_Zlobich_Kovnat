@@ -1,14 +1,18 @@
 package models;
 
-import lombok.Data;
+import lombok.Builder;
 
-@Data
+@Builder(setterPrefix = "set")
 public class Project {
     private String name;
     private String code;
     private String description;
-    private String group;
 
+    public Project(String name, String code, String description) {
+        this.name = name;
+        this.code = code;
+        this.description = description;
+    }
 
     public String getName() {
         return name;
@@ -32,13 +36,5 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
     }
 }

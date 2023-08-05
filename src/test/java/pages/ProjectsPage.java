@@ -22,7 +22,6 @@ public class ProjectsPage extends BasePage {
 
     @Override
     public ProjectsPage isPageOpened() {
-        wait.until(ExpectedConditions.elementToBeClickable(searchForProjectsLocator));
         return this;
     }
 

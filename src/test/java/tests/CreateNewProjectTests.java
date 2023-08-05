@@ -5,8 +5,10 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
 import models.Project;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.TestDataGenerator;
 
 public class CreateNewProjectTests extends BaseTest{
     @Test(groups = {"smoke"})
@@ -14,23 +16,24 @@ public class CreateNewProjectTests extends BaseTest{
     @Link(name = "Log In Page", url = "")
     @Severity(SeverityLevel.CRITICAL)
     public void createNewProjectTests() {
-        Project project = new Project();
-        project.setName("My first project");
-        project.setCode("5555");
-        project.setDescription("There are my test cases");
+        Project actualProject = TestDataGenerator.positiveAddProjectGeneration();
+
 
         loginPage.openPage()
                 .isPageOpened()
-                .logIn(USERNAME,PASSWORD);
+                .waitForElementClickable(By.cssSelector("#createButton"));
+        loginPage.logIn(EMAIL,PASSWORD);
         Assert.assertTrue(projectsPage.isCreateProjectButtonDisplayed());
 
-        projectsPage.isPageOpened()
-                .clickCreateNewProjectButton();
+        projectsPage.clickCreateNewProjectButton();
         Assert.assertTrue(projectsPage.isCreateProjectFormDisplayed());
 
         createNewProjectPage.isPageOpened()
-                .fillingOutProjectForm(project);
+                .fillingOutProjectForm(actualProject);
         createNewProjectPage.clickOnPrivateRadioButton();
         createNewProjectPage.clickOnProjectButton();
+        projectsRepositoryPage.clickSettingsButton();
+        Project expectedProject = projectSettingsPage.getProjectInfo();
+        Assert.assertEquals(expectedProject, actualProject);
     }
 }
