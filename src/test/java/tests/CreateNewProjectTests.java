@@ -21,8 +21,7 @@ public class CreateNewProjectTests extends BaseTest{
 
         loginPage.openPage()
                 .isPageOpened()
-                .waitForElementClickable(By.cssSelector("#createButton"));
-        loginPage.logIn(EMAIL,PASSWORD);
+                .logIn(EMAIL,PASSWORD);
         Assert.assertTrue(projectsPage.isCreateProjectButtonDisplayed());
 
         projectsPage.clickCreateNewProjectButton();

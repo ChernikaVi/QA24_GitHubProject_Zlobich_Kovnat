@@ -44,7 +44,7 @@ public abstract class BaseTest {
         projectsPage = new ProjectsPage(driver);
         createNewProjectPage = new CreateNewProjectPage(driver);
         projectSettingsPage = new ProjectSettingsPage(driver);
-        projectSettingsPage = new ProjectSettingsPage(driver);
+        projectsRepositoryPage = new ProjectsRepositoryPage(driver);
     }
 
     @AfterClass(alwaysRun = true)
