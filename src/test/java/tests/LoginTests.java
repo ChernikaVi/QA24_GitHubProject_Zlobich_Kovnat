@@ -9,10 +9,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest{
-    private String expectedErrorText = "These credentials do not match our records.";
-    private String expectedErrorPasswordText = "Security notice: The password entered has been found in a public data leak. " +
-            "Please reset your password to ensure the safety of your account";
-
+    private String ERROR_USERNAME = "raptorkost@gmal.com";
+    private String ERROR_PASSWORD = "12345";
 
     @Test(groups = {"smoke"})
     @Description("Тестирование кнопки формы Log In")
@@ -21,36 +19,38 @@ public class LoginTests extends BaseTest{
     public void positiveLogInTest() {
         loginPage.openPage()
                 .isPageOpened()
-                .logIn(USERNAME, PASSWORD);
-        Assert.assertTrue(loginPage.isLayoutDisplayed());
+                .logIn(EMAIL,PASSWORD);
+        projectsPage.isPageOpened();
+    }
+
+    @Test(groups = {"smoke"}, description = "негативный тест Login формы ", dataProvider = "negativeLoginTestData")
+    public void negativeLoginTest(String email, String password, String expectedErrorMessage) {
+        loginPage.logIn(email, password);
+        Assert.assertEquals(loginPage.getErrorText(), expectedErrorMessage);
     }
 
     @DataProvider
     public Object[][] negativeLoginTestData() {
         return new Object[][]{
                 {"", PASSWORD, "This field is required"},
-                {USERNAME, "", "This field is required"}
+                {EMAIL, "", "This field is required"}
         };
     }
 
-    @Test(groups = {"smoke"})
-    @Description("Invalid username test")
-    @Severity(SeverityLevel.CRITICAL)
-    public void negativeLoginTestWrongUsername() {
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(ERROR_USERNAME, PASSWORD);
-        Assert.assertEquals(loginPage.getErrorText(), expectedErrorText);
+    @Test(groups = {"smoke"}, description = "негативный тест Login формы ", dataProvider = "negativeLoginTestData2")
+    public void negativeLoginTest2(String email, String password, String expectedErrorMessage) {
+        loginPage.logIn(email, password);
+        Assert.assertEquals(loginPage.getErrorText2(), expectedErrorMessage);
     }
 
-    @Test(groups = {"smoke"})
-    @Description("Invalid password test")
-    @Severity(SeverityLevel.CRITICAL)
-    public void negativeLoginTestWrongPassword() {
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(USERNAME, ERROR_PASSWORD);
-        Assert.assertEquals(loginPage.getErrorPasswordText(), expectedErrorPasswordText);
+    @DataProvider
+    public Object[][] negativeLoginTestData2() {
+        return new Object[][]{
+                {ERROR_USERNAME, PASSWORD, "These credentials do not match our records."},
+                {EMAIL, ERROR_PASSWORD, "Security notice: The password entered has been found in a public data leak. " +
+                        "Please reset your password to ensure the safety of your account"}
+        };
     }
 }
+
 
