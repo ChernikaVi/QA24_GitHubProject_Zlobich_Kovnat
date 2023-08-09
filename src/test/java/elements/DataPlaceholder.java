@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 @Log4j2
 public class DataPlaceholder extends BaseElement {
 
-    private final static String DATA_PLACEHOLDER_LOCATOR = "//label[text()='%s']//parent::div//following-sibling::div//p[@class]";
+    private String dataPlaceholderLocator = "//label[text()='%s']//parent::div//following-sibling::div//p[@class]";
     private String labelName;
 
     public DataPlaceholder(WebDriver driver, String labelName) {
@@ -17,14 +17,14 @@ public class DataPlaceholder extends BaseElement {
 
     private void clearDataPlaceholderValue() {
         log.info("clearing the data placeholder value");
-        driver.findElement(By.xpath(String.format(DATA_PLACEHOLDER_LOCATOR, this.labelName))).clear();
+        driver.findElement(By.xpath(String.format(dataPlaceholderLocator, this.labelName))).clear();
     }
 
     public void setDataPlaceholderValue(String value) {
-        scrollToElement(driver.findElement(By.xpath(String.format(DATA_PLACEHOLDER_LOCATOR, this.labelName))));
+        scrollToElement(driver.findElement(By.xpath(String.format(dataPlaceholderLocator, this.labelName))));
         clearDataPlaceholderValue();
         log.info(String.format("setting data placeholder value: %s", value));
-        driver.findElement(By.xpath(String.format(DATA_PLACEHOLDER_LOCATOR, this.labelName))).sendKeys(value);
+        driver.findElement(By.xpath(String.format(dataPlaceholderLocator, this.labelName))).sendKeys(value);
     }
 
 }
