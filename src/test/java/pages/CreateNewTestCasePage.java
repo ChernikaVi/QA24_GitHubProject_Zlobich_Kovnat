@@ -6,6 +6,8 @@ import lombok.extern.log4j.Log4j2;
 import models.TestCase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 @Log4j2
 public class CreateNewTestCasePage extends BaseElement {
@@ -13,6 +15,8 @@ public class CreateNewTestCasePage extends BaseElement {
     private By addStepButtonLocator = By.xpath("//*[text()=' Add step']");
     private By saveButtonLocator = By.cssSelector("#save-case");
     private By successfullyCreatedTestCaseMessage = By.xpath("//*[text()='Test case was created successfully!']");
+    private By uploadAttachmentsLocator = By.xpath("//*[text()='Add attachment']");
+    private By uploadNewAttachmentsLocator = By.xpath("//*[text()='Drop files here to upload']");
 
 
     public CreateNewTestCasePage(WebDriver driver) {
@@ -34,7 +38,7 @@ public class CreateNewTestCasePage extends BaseElement {
     public boolean successfullyCreatedTestCaseMessageIsDisplayed() {
         return driver.findElement(successfullyCreatedTestCaseMessage).isDisplayed();
     }
-
+    @Step("Filling out test case")
     public void fillingOutTestCaseForm(TestCase testCase) {
         log.info("Filling values into the create new test case page");
         new Input(driver, "Title").setInputValue(testCase.getTitle());
@@ -53,4 +57,12 @@ public class CreateNewTestCasePage extends BaseElement {
         new DataPlaceholderForSteps(driver, 1, "Data").setDataPlaceholderForStepsValue(testCase.getData());
         new DataPlaceholderForSteps(driver, 1, "Expected result").setDataPlaceholderForStepsValue(testCase.getExpectedResult());
     }
+/*    @Step
+    public void fileUpload() {
+        Actions actions = new Actions(driver);
+        driver.findElement(uploadAttachmentsLocator).click();
+        driver.findElement(uploadNewAttachmentsLocator);
+        driver.findElement(uploadNewAttachmentsLocator).sendKeys(System.getProperty("users") + "/src/test/FileUpload.png");
+        driver.switchTo().defaultContent();
+    }*/
 }
