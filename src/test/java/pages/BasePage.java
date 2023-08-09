@@ -13,8 +13,8 @@ public abstract class BasePage {
     public abstract BasePage openPage();
     public abstract BasePage isPageOpened();
 
-    public void waitForElementClickable(By by){
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("")));
+    public void waitForElementClickable(By by) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("by")));
     }
 
     public BasePage(WebDriver driver) {

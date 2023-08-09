@@ -25,12 +25,13 @@ public class CreateNewProjectPage extends BasePage {
 
     @Override
     public CreateNewProjectPage openPage() {
-        driver.get("https://app.qase.io/projects");
+        driver.get("https://app.qase.io");
         return this;
     }
 
     @Override
     public CreateNewProjectPage isPageOpened() {
+        wait.until(ExpectedConditions.elementToBeClickable(createNewProjectButtonLocator));
         return this;
     }
 
