@@ -19,7 +19,6 @@ public class LoginPage extends BasePage {
 
     private By layoutLocator = By.cssSelector("#layout");
     private By errorMessageTextLocator = By.xpath("//small[text()='This field is required']");
-
     private By errorMessageTextPasswordLocator = By.cssSelector(".ic9QAx");
 
     @Override

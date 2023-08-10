@@ -3,6 +3,7 @@ package elements;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 @Log4j2
 public class DropdownForCase extends BaseElement {
@@ -17,7 +18,8 @@ public class DropdownForCase extends BaseElement {
     }
 
     public void chooseDropdownOption(String value) {
-        scrollToElement(driver.findElement(By.xpath(String.format(dropdownLocator, this.labelName))));
+        WebElement dropdown = driver.findElement(By.xpath(String.format(dropdownLocator, this.labelName)));
+        scrollToElement(dropdown);
         log.info(String.format("clicking dropdown button with label: %s", this.labelName));
         driver.findElement(By.xpath(String.format(dropdownLocator, this.labelName))).click();
         log.info(String.format("clicking dropdown option: %s", value));

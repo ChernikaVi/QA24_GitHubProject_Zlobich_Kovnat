@@ -3,6 +3,7 @@ package elements;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 @Log4j2
 public class DataPlaceholderForSteps extends BaseElement {
@@ -18,7 +19,8 @@ public class DataPlaceholderForSteps extends BaseElement {
     }
 
     public void setDataPlaceholderForStepsValue(String value) {
-        scrollToElement(driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, this.title, this.itemName))));
+        WebElement dataPlaceholder = driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, this.title, this.itemName)));
+        scrollToElement(dataPlaceholder);
         log.info(String.format("sending the following value: %s", value));
         driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, this.title, this.itemName))).sendKeys(value);
     }

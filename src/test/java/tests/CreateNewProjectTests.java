@@ -53,8 +53,6 @@ public class CreateNewProjectTests extends BaseTest{
                 .fillingOutProjectForm(actualProject);
         createNewProjectPage.clickOnPrivateRadioButton();
         createNewProjectPage.clickOnProjectButton();
-        projectsRepositoryPage.clickSettingsButton();
-        Project expectedProject = TestDataGenerator.positiveAddProjectGeneration();
-        Assert.assertNotSame(expectedProject, actualProject);
+        Assert.assertTrue(createNewProjectPage.createProjectFormIsDisplayed());
     }
 }

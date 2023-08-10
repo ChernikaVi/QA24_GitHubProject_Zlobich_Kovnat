@@ -1,5 +1,7 @@
 package pages;
 
+import elements.DataPlaceholder;
+import elements.Input;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.Suite;
@@ -20,10 +22,10 @@ public class CreateSuitePage extends BasePage {
     private By deleteSuiteButtonLocator = By.xpath("//*[text()='Delete']");
 
     private By createNewProjectButtonLocator = By.cssSelector("#createButton");
-    private By projectTitleLocator = By.linkText("My first project");
+    private By projectTitleLocator = By.xpath("//a[@href='/project/MFP5555']");
     private By createSuiteButtonLocator = By.cssSelector("#create-suite-button");
     private By successfullyCreatedSuiteMessage = By.xpath("//*[text()='Suite was successfully created.']");
-    private By editedTitle = By.xpath("//*[@title='My suite 1']");
+    private By editedTitle = By.xpath("//*[@data-suite-body-id]");
     private By successfullyDeletedMessageText = By.xpath("//*[text()='Suite was successfully deleted.']");
 
 
@@ -49,11 +51,11 @@ public class CreateSuitePage extends BasePage {
     }
 
     @Step("Filling out suite")
-    public void fillingOutProjectForm(Suite suite) {
+    public void fillingOutSuiteForm(Suite suite) {
         log.info(String.format("Filling out suite form = %s", suite));
-        driver.findElement(suiteTitle).sendKeys(suite.getSuiteTitle());
-        driver.findElement(suiteDescription).sendKeys(suite.getSuiteDescription());
-        driver.findElement(suitePreconditions).sendKeys(suite.getPreconditions());
+        new Input(driver, "Suite name").setInputValue(suite.getSuiteTitle());
+        new DataPlaceholder(driver, "Description").setDataPlaceholderValue(suite.getSuiteDescription());
+        new DataPlaceholder(driver, "Preconditions").setDataPlaceholderValue(suite.getPreconditions());
     }
 
     @Step
@@ -95,4 +97,8 @@ public class CreateSuitePage extends BasePage {
     public boolean successfullyDeletedMessageTextIsDisplayed() {
         return driver.findElement(successfullyDeletedMessageText).isDisplayed();
     }
+/*    @Step
+    public boolean deletedSuiteIsNotDisplayed() {
+        return driver.findElement(editedTitle).isDisplayed();
+    }*/
 }

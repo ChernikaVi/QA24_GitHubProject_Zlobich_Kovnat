@@ -30,7 +30,6 @@ public class ProjectSettingsPage extends BasePage{
     public Project getProjectInfo() {
         log.info(String.format("Check of project info"));
         Project project = Project.builder()
-                .setName(driver.findElement(By.cssSelector("#project-name")).getText())
                 .setDescription(driver.findElement(By.cssSelector("#description-area")).getText()).build();
         return project;
     }
