@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @Log4j2
 public class CreateNewTestCasePage extends BaseElement {
@@ -16,7 +17,7 @@ public class CreateNewTestCasePage extends BaseElement {
     private By saveButtonLocator = By.cssSelector("#save-case");
     private By successfullyCreatedTestCaseMessage = By.xpath("//*[text()='Test case was created successfully!']");
     private By uploadAttachmentsLocator = By.xpath("//*[text()='Add attachment']");
-    private By uploadNewAttachmentsLocator = By.xpath("//*[text()='Drop files here to upload']");
+    private By uploadNewAttachmentsLocator = By.cssSelector(".attach-new-form");
 
 
     public CreateNewTestCasePage(WebDriver driver) {
@@ -57,12 +58,4 @@ public class CreateNewTestCasePage extends BaseElement {
         new DataPlaceholderForSteps(driver, 1, "Data").setDataPlaceholderForStepsValue(testCase.getData());
         new DataPlaceholderForSteps(driver, 1, "Expected result").setDataPlaceholderForStepsValue(testCase.getExpectedResult());
     }
-/*    @Step
-    public void fileUpload() {
-        Actions actions = new Actions(driver);
-        driver.findElement(uploadAttachmentsLocator).click();
-        driver.findElement(uploadNewAttachmentsLocator);
-        driver.findElement(uploadNewAttachmentsLocator).sendKeys(System.getProperty("users") + "/src/test/FileUpload.png");
-        driver.switchTo().defaultContent();
-    }*/
 }
