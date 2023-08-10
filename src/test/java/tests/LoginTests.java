@@ -13,8 +13,8 @@ public class LoginTests extends BaseTest{
     private String ERROR_PASSWORD = "12345";
 
     @Test(groups = {"smoke"})
-    @Description("Тестирование кнопки формы Log In")
-    @Link(name = "Log In Page", url = "https://app.qase.io/login")
+    @Description("Test Log In Form")
+    @Link(name = "Log In Page")
     @Severity(SeverityLevel.CRITICAL)
     public void positiveLogInTest() {
         loginPage.openPage()
@@ -40,7 +40,7 @@ public class LoginTests extends BaseTest{
     @Test(groups = {"smoke"}, description = "негативный тест Login формы ", dataProvider = "negativeLoginTestData2")
     public void negativeLoginTest2(String email, String password, String expectedErrorMessage) {
         loginPage.logIn(email, password);
-        Assert.assertEquals(loginPage.getErrorText2(), expectedErrorMessage);
+        Assert.assertEquals(loginPage.getErrorMessageText(), expectedErrorMessage);
     }
 
     @DataProvider

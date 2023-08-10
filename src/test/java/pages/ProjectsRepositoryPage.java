@@ -17,7 +17,7 @@ public class ProjectsRepositoryPage extends BasePage{
 
     @Override
     public ProjectsRepositoryPage openPage() {
-        driver.get("https://app.qase.io/project/MFP5555");
+        driver.get("https://app.qase.io");
         return this;
     }
 
@@ -27,10 +27,6 @@ public class ProjectsRepositoryPage extends BasePage{
         return this;
     }
 
-    @Step
-    public boolean isCreateCaseButtonDisplayed() {
-        return driver.findElement(createCaseButtonLocator).isDisplayed();
-    }
     @Step
     public void clickSettingsButton() {
         driver.findElement(settingsButtonLocator).click();
