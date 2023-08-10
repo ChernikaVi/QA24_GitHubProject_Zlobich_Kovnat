@@ -3,6 +3,7 @@ package elements;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 @Log4j2
 public class Input extends BaseElement {
@@ -14,14 +15,10 @@ public class Input extends BaseElement {
         this.labelName = labelName;
     }
 
-    private void clearInputValue() {
-        log.info("clearing the input value");
-        driver.findElement(By.xpath(String.format(inputLocator, this.labelName))).clear();
-    }
-
     public void setInputValue(String inputValue) {
-        scrollToElement(driver.findElement(By.xpath(String.format(inputLocator, this.labelName))));
-        clearInputValue();
+        WebElement input = driver.findElement(By.xpath(String.format(inputLocator, this.labelName)));
+        scrollToElement(input);
+        input.clear();
         log.info(String.format("entering the input value: %s", inputValue));
         driver.findElement(By.xpath(String.format(inputLocator, this.labelName))).sendKeys(inputValue);
     }

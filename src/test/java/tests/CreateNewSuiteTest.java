@@ -26,7 +26,7 @@ public class CreateNewSuiteTest extends BaseTest{
         projectsPage.clickOnProjectTitle();
         createSuitePage.isPageOpened()
                 .clickCreateSuiteButton();
-        createSuitePage.fillingOutProjectForm(suite);
+        createSuitePage.fillingOutSuiteForm(suite);
         createSuitePage.clickCreateNewSuiteButton();
         Assert.assertTrue(createSuitePage.getSuccessfullyCreatedSuiteMessageIsDisplayed());
     }
@@ -45,7 +45,7 @@ public class CreateNewSuiteTest extends BaseTest{
         projectsPage.clickOnProjectTitle();
         createSuitePage.isPageOpened();
         createSuitePage.clickEditSuiteButtonIcon();
-        createSuitePage.fillingOutProjectForm(suite);
+        createSuitePage.fillingOutSuiteForm(suite);
         createSuitePage.clickSaveChangesSuiteButton();
         Assert.assertTrue(createSuitePage.editedTitleIsDisplayed());
     }
@@ -56,15 +56,11 @@ public class CreateNewSuiteTest extends BaseTest{
     @Severity(SeverityLevel.CRITICAL)
     public void deleteSuitTest() {
 
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(EMAIL,PASSWORD);
-        projectsPage.isPageOpened();
-
         projectsPage.clickOnProjectTitle();
         createSuitePage.isPageOpened();
         createSuitePage.clickDeleteSuiteButtonIcon();
         createSuitePage.clickDeleteSuiteButton();
         Assert.assertTrue(createSuitePage.successfullyDeletedMessageTextIsDisplayed());
+/*        createSuitePage.deletedSuiteIsNotDisplayed();*/
     }
 }

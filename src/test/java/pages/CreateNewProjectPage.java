@@ -21,6 +21,7 @@ public class CreateNewProjectPage extends BasePage {
 
     private By createNewProjectButtonLocator = By.cssSelector("#createButton");
     private By createProjectButtonLocator = By.xpath("//*[@type='submit']");
+    private By createProjectForm = By.cssSelector(".ReactModal__Content ReactModal");
 
 
     @Override
@@ -56,5 +57,10 @@ public class CreateNewProjectPage extends BasePage {
     @Step
     public void clickOnPrivateRadioButton(){
         driver.findElement(privateRadioButton).click();
+    }
+
+    @Step
+    public boolean createProjectFormIsDisplayed() {
+        return driver.findElement(createProjectForm).isDisplayed();
     }
 }

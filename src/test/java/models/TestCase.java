@@ -1,5 +1,6 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
 import enums.*;
 import lombok.Builder;
 import lombok.Data;
@@ -8,13 +9,10 @@ import lombok.EqualsAndHashCode;
 @Builder(setterPrefix = "set")
 @Data
 public class TestCase {
-    @EqualsAndHashCode.Exclude
+
     private String title;
-    @EqualsAndHashCode.Exclude
     private String description;
-    @EqualsAndHashCode.Exclude
     private String preConditions;
-    @EqualsAndHashCode.Exclude
     private String postConditions;
     @EqualsAndHashCode.Exclude
     private String parameterTitle;
@@ -28,20 +26,14 @@ public class TestCase {
     private String expectedResult;
     @EqualsAndHashCode.Exclude
     private String suite;
-    @EqualsAndHashCode.Exclude
     private Status status;
-    @EqualsAndHashCode.Exclude
     private Severity severity;
-    @EqualsAndHashCode.Exclude
     private Priority priority;
-    @EqualsAndHashCode.Exclude
     private Type type;
-    @EqualsAndHashCode.Exclude
     private Layer layer;
-    @EqualsAndHashCode.Exclude
+    @SerializedName(value = "is_flaky")
     private IsFlaky isFlaky;
-    @EqualsAndHashCode.Exclude
     private Behavior behavior;
-    @EqualsAndHashCode.Exclude
+    @SerializedName(value = "automation")
     private AutomationStatus automationStatus;
 }

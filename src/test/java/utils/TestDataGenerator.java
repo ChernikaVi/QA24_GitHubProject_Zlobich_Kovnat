@@ -16,7 +16,7 @@ public class TestDataGenerator {
 
     public static Project negativeAddProjectGeneration() {
         return Project.builder()
-                .setName("My project")
+                .setName("")
                 .setCode("5555")
                 .setDescription("There are my test cases")
                 .build();
@@ -32,9 +32,9 @@ public class TestDataGenerator {
 
     public static Suite editSuiteGeneration() {
         return Suite.builder()
-                .setSuiteTitle(" 1")
-                .setSuiteDescription("")
-                .setPreconditions("")
+                .setSuiteTitle("My suite 1")
+                .setSuiteDescription("Creating new suite")
+                .setPreconditions("Open projects page")
                 .build();
     }
 

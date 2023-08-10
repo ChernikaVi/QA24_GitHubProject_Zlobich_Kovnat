@@ -11,6 +11,5 @@ public class Project {
     private String name;
     @EqualsAndHashCode.Exclude
     private String code;
-    @EqualsAndHashCode.Exclude
     private String description;
 }

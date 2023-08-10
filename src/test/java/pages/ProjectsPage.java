@@ -12,7 +12,7 @@ public class ProjectsPage extends BasePage {
 
     private By createNewProjectButtonLocator = By.cssSelector("#createButton");
     private By createProjectFormLocator = By.cssSelector(".ReactModal__Content");
-    private By projectTitleLocator = By.linkText("My first project");
+    private By projectTitleLocator = By.xpath("//a[@href='/project/MFP5555']");
     private By createNewTestCaseButtonLocator = By.cssSelector("#create-case-button");
 
     @Override

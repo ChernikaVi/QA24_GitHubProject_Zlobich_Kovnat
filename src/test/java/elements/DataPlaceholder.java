@@ -3,6 +3,7 @@ package elements;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 @Log4j2
 public class DataPlaceholder extends BaseElement {
@@ -15,16 +16,11 @@ public class DataPlaceholder extends BaseElement {
         this.labelName = labelName;
     }
 
-    private void clearDataPlaceholderValue() {
-        log.info("clearing the data placeholder value");
-        driver.findElement(By.xpath(String.format(dataPlaceholderLocator, this.labelName))).clear();
-    }
-
     public void setDataPlaceholderValue(String value) {
-        scrollToElement(driver.findElement(By.xpath(String.format(dataPlaceholderLocator, this.labelName))));
-        clearDataPlaceholderValue();
+        WebElement dataPlaceholder = driver.findElement(By.xpath(String.format(dataPlaceholderLocator, this.labelName)));
+        scrollToElement(dataPlaceholder);
+        dataPlaceholder.clear();
         log.info(String.format("setting data placeholder value: %s", value));
-        driver.findElement(By.xpath(String.format(dataPlaceholderLocator, this.labelName))).sendKeys(value);
+        dataPlaceholder.sendKeys(value);
     }
-
 }
