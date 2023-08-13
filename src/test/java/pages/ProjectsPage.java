@@ -11,18 +11,19 @@ public class ProjectsPage extends BasePage {
     }
 
     private By createNewProjectButtonLocator = By.cssSelector("#createButton");
-    private By searchForProjectsLocator = By.cssSelector("//*[@name='title']");
     private By createProjectFormLocator = By.cssSelector(".ReactModal__Content");
+    private By projectTitleLocator = By.xpath("//a[@href='/project/MFP5555']");
+    private By createNewTestCaseButtonLocator = By.cssSelector("#create-case-button");
 
     @Override
     public ProjectsPage openPage() {
-        driver.get("https://app.qase.io/projects");
+        driver.get("https://app.qase.io");
         return this;
     }
 
     @Override
     public ProjectsPage isPageOpened() {
-        wait.until(ExpectedConditions.elementToBeClickable(searchForProjectsLocator));
+        wait.until(ExpectedConditions.elementToBeClickable(createNewProjectButtonLocator));
         return this;
     }
 
@@ -39,6 +40,16 @@ public class ProjectsPage extends BasePage {
     @Step
     public boolean isCreateProjectFormDisplayed() {
         return driver.findElement(createProjectFormLocator).isDisplayed();
+    }
+
+    @Step
+    public void clickOnProjectTitle(){
+        driver.findElement(projectTitleLocator).click();
+    }
+
+    @Step
+    public void clickCreateNewTestCaseButton(){
+        driver.findElement(createNewTestCaseButtonLocator).click();
     }
 }
 

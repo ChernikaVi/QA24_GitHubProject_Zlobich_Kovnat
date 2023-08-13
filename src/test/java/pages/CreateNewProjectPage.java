@@ -7,27 +7,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.Locale;
-
 @Log4j2
 public class CreateNewProjectPage extends BasePage {
     public CreateNewProjectPage(WebDriver driver) {
         super(driver);
     }
 
-    private static final By PROJECT_NAME = By.cssSelector("#project-name");
-    private static final By PROJECT_CODE = By.cssSelector("#project-code");
-    private static final By DESCRIPTION = By.cssSelector("#description-area");
-    private static final By privateRadioButton = By.xpath("//*[@value='private']");
-    private static final By publicRadioButton = By.xpath("//*[@value='public']");
+    private By projectName = By.cssSelector("#project-name");
+    private By projectCode = By.cssSelector("#project-code");
+    private By description = By.cssSelector("#description-area");
+    private By privateRadioButton = By.xpath("//*[@value='private']");
+    private By publicRadioButton = By.xpath("//*[@value='public']");
 
-    private static final By createNewProjectButtonLocator = By.cssSelector("#createButton");
-    private static final By createProjectButtonLocator = By.xpath("//*[@type='submit']");
+    private By createNewProjectButtonLocator = By.cssSelector("#createButton");
+    private By createProjectButtonLocator = By.xpath("//*[@type='submit']");
+    private By createProjectForm = By.cssSelector(".ReactModal__Content ReactModal");
 
 
     @Override
     public CreateNewProjectPage openPage() {
-        driver.get("https://app.qase.io/projects");
+        driver.get("https://app.qase.io");
         return this;
     }
 
@@ -40,9 +39,9 @@ public class CreateNewProjectPage extends BasePage {
     @Step("Filling out project")
     public void fillingOutProjectForm(Project project) {
         log.info(String.format("Filling out project form = %s", project));
-        driver.findElement(PROJECT_NAME).sendKeys(project.getName());
-        driver.findElement(PROJECT_CODE).sendKeys(project.getCode());
-        driver.findElement(DESCRIPTION).sendKeys(project.getDescription());
+        driver.findElement(projectName).sendKeys(project.getName());
+        driver.findElement(projectCode).sendKeys(project.getCode());
+        driver.findElement(description).sendKeys(project.getDescription());
     }
 
     @Step
@@ -58,5 +57,10 @@ public class CreateNewProjectPage extends BasePage {
     @Step
     public void clickOnPrivateRadioButton(){
         driver.findElement(privateRadioButton).click();
+    }
+
+    @Step
+    public boolean createProjectFormIsDisplayed() {
+        return driver.findElement(createProjectForm).isDisplayed();
     }
 }
