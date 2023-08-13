@@ -15,7 +15,7 @@ pipeline {
     }
 
     parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'almostEnd', name: 'BRANCH', type: 'PT_BRANCH'
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'featureAlmostEnd', name: 'BRANCH', type: 'PT_BRANCH'
         choice(name: 'SUITE', choices: ['suites/smokeTest.xml', 'suites/regressionTest.xml',], description: 'Choose suite to run')
 
     }
