@@ -22,6 +22,6 @@ public class DataPlaceholderForSteps extends BaseElement {
         WebElement dataPlaceholder = driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, this.title, this.itemName)));
         scrollToElement(dataPlaceholder);
         log.info(String.format("sending the following value: %s", value));
-        driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, this.title, this.itemName))).sendKeys(value);
+        dataPlaceholder.sendKeys(value);
     }
 }

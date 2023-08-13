@@ -97,8 +97,4 @@ public class CreateSuitePage extends BasePage {
     public boolean successfullyDeletedMessageTextIsDisplayed() {
         return driver.findElement(successfullyDeletedMessageText).isDisplayed();
     }
-/*    @Step
-    public boolean deletedSuiteIsNotDisplayed() {
-        return driver.findElement(editedTitle).isDisplayed();
-    }*/
 }
