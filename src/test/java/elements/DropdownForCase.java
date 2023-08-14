@@ -21,8 +21,8 @@ public class DropdownForCase extends BaseElement {
         WebElement dropdown = driver.findElement(By.xpath(String.format(dropdownLocator, this.labelName)));
         scrollToElement(dropdown);
         log.info(String.format("clicking dropdown button with label: %s", this.labelName));
-        driver.findElement(By.xpath(String.format(dropdownLocator, this.labelName))).click();
+        dropdown.click();
         log.info(String.format("clicking dropdown option: %s", value));
-        driver.findElement(By.xpath(String.format(dropdownValue, value))).click();
+        dropdown.click();
     }
 }

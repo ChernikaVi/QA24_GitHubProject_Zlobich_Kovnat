@@ -20,6 +20,6 @@ public class Input extends BaseElement {
         scrollToElement(input);
         input.clear();
         log.info(String.format("entering the input value: %s", inputValue));
-        driver.findElement(By.xpath(String.format(inputLocator, this.labelName))).sendKeys(inputValue);
+        input.sendKeys(inputValue);
     }
 }
