@@ -61,6 +61,6 @@ public class CreateNewSuiteTest extends BaseTest{
         createSuitePage.clickDeleteSuiteButtonIcon();
         createSuitePage.clickDeleteSuiteButton();
         Assert.assertTrue(createSuitePage.successfullyDeletedMessageTextIsDisplayed());
-/*        createSuitePage.deletedSuiteIsNotDisplayed();*/
+        Assert.assertTrue(createSuitePage.isSuiteExist(TestDataGenerator.dddSuiteGeneration().getSuiteTitle()));
     }
 }

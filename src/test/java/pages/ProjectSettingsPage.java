@@ -13,7 +13,6 @@ public class ProjectSettingsPage extends BasePage{
         super(driver);
     }
     private By deleteProjectButtonLocator = By.xpath("//*[text()=' Delete project']");
-    private By clickProjectsButtonLocator = By.xpath("//a[@href='/projects']");
 
     @Override
     public ProjectSettingsPage openPage() {
@@ -28,8 +27,9 @@ public class ProjectSettingsPage extends BasePage{
     }
 
     public Project getProjectInfo() {
-        log.info(String.format("Check of project info"));
+        log.info(String.format("Checking of project info"));
         Project project = Project.builder()
+                .setName(driver.findElement(By.cssSelector("#project-name")).getAttribute("value"))
                 .setDescription(driver.findElement(By.cssSelector("#description-area")).getText()).build();
         return project;
     }

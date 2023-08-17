@@ -16,7 +16,7 @@ public class CreateTestCaseTest extends BaseTest{
     @Link(name = "Log In Page")
     @Severity(SeverityLevel.CRITICAL)
     public void positiveCreateNewTestCaseTest() {
-        TestCase testCase = TestDataGenerator.createTestCaseGeneration();
+        TestCase actualProject = TestDataGenerator.createTestCaseGeneration();
 
         loginPage.openPage()
                 .isPageOpened()
@@ -27,8 +27,12 @@ public class CreateTestCaseTest extends BaseTest{
         createSuitePage.isPageOpened();
         projectsPage.clickCreateNewTestCaseButton();
         createNewTestCasePage.clickAddStepButton();
-        createNewTestCasePage.fillingOutTestCaseForm(testCase);
+        createNewTestCasePage.fillingOutTestCaseForm(actualProject);
         createNewTestCasePage.clickSaveCaseButton();
         Assert.assertTrue(createNewTestCasePage.successfullyCreatedTestCaseMessageIsDisplayed());
+        testCaseInfo.clickTestCaseButton();
+        testCaseInfo.clickTestCaseEditButton();
+        TestCase expectedProject = testCaseInfo.getTestCaseDetails();
+        Assert.assertEquals(expectedProject, actualProject);
     }
 }

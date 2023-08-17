@@ -21,7 +21,8 @@ public class CreateNewProjectPage extends BasePage {
 
     private By createNewProjectButtonLocator = By.cssSelector("#createButton");
     private By createProjectButtonLocator = By.xpath("//*[@type='submit']");
-    private By createProjectForm = By.cssSelector(".ReactModal__Content ReactModal");
+    private By createProjectForm = By.xpath("//*[contains(@role,'dialog')]");
+
 
 
     @Override

@@ -7,7 +7,10 @@ import lombok.extern.log4j.Log4j2;
 import models.Suite;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 @Log4j2
 public class CreateSuitePage extends BasePage {
@@ -20,9 +23,11 @@ public class CreateSuitePage extends BasePage {
     private By deleteSuiteIconLocator = By.cssSelector(".fa-trash");
     private By saveEditedSuiteButtonLocator = By.xpath("//*[text()='Save']");
     private By deleteSuiteButtonLocator = By.xpath("//*[text()='Delete']");
+    private By allSuites = By.cssSelector("#suitecases-container");
+
 
     private By createNewProjectButtonLocator = By.cssSelector("#createButton");
-    private By projectTitleLocator = By.xpath("//a[@href='/project/MFP5555']");
+    private By projectTitleLocator = By.xpath("//a[contains(@class,'defect-title')][text()='%s']");
     private By createSuiteButtonLocator = By.cssSelector("#create-suite-button");
     private By successfullyCreatedSuiteMessage = By.xpath("//*[text()='Suite was successfully created.']");
     private By editedTitle = By.xpath("//*[@data-suite-body-id]");
@@ -96,5 +101,16 @@ public class CreateSuitePage extends BasePage {
     @Step
     public boolean successfullyDeletedMessageTextIsDisplayed() {
         return driver.findElement(successfullyDeletedMessageText).isDisplayed();
+    }
+
+    @Step("Checking the existence of the suite with title '{suiteTitle}'")
+    public boolean isSuiteExist(String suiteTitle) {
+        List<WebElement> suitesList = driver.findElements(allSuites);
+        for (WebElement suite : suitesList) {
+            if (suite.getText().equals(suiteTitle)) {
+            }
+            return false;
+        }
+        return true;
     }
 }
