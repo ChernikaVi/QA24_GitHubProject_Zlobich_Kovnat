@@ -100,7 +100,7 @@
     </build>
 
     <properties>
-        <suite>suites/smokeTest.xml</suite>
+        <suite>suites/smokeTests.xml</suite>
         <aspectj.version>1.9.19</aspectj.version>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
