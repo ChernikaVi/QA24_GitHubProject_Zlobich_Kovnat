@@ -113,4 +113,15 @@ public class CreateSuitePage extends BasePage {
         }
         return true;
     }
+
+    @Step("Checking the existence of the suite with title '{suiteTitle}'")
+    public boolean isSuiteDisplayed(String suiteTitle) {
+        List<WebElement> suitesList = driver.findElements(allSuites);
+        for (WebElement suite : suitesList) {
+            if (suite.getText().equals(suiteTitle)) {
+            }
+            return true;
+        }
+        return false;
+    }
 }
