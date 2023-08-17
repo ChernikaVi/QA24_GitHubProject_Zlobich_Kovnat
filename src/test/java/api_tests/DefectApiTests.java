@@ -1,7 +1,6 @@
 package api_tests;
 
 import controllers.DefectController;
-import controllers.TestCaseController;
 import io.restassured.response.Response;
 import models.Defect;
 import org.testng.Assert;
@@ -49,7 +48,7 @@ public class DefectApiTests extends BaseApiTest {
         assertEquals(statusCode, 200);
     }
     @Test(priority = 4)
-    public void deleteCaseTest() {
+    public void deleteDefect() {
         int statusCode = new DefectController().deleteDefect(PROJECT_CODE, DEFECT_ID).statusCode();
         Assert.assertEquals(statusCode, 200);
     }
