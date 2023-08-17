@@ -25,7 +25,7 @@ pipeline {
             steps {
                 git branch: "${params.BRANCH}", url: 'https://github.com/ChernikaVi/QA24_QaseProject_Zlobich_Kovnat'
 
-                sh "mvn -Dmaven.test.failure.ignore=true -Dsuite=${params.SUITE} -Dbrowser=${params.BROWSER} -Dheadless=${params.HEADLESS} clean test"
+                cmd "mvn -Dmaven.test.failure.ignore=true -Dsuite=${params.SUITE} -Dbrowser=${params.BROWSER} -Dheadless=${params.HEADLESS} clean test"
             }
 
             post {
