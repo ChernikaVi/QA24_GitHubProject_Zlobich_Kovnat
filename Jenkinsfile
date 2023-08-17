@@ -22,6 +22,10 @@ pipeline {
 
     stages {
         stage('Run test') {
+                    withMaven(maven : 'apache-maven-3.6.1') {
+                        bat 'mvn clean compile'
+                    }
+                }
             steps {
                 git branch: "${params.BRANCH}", url: 'https://github.com/ChernikaVi/QA24_QaseProject_Zlobich_Kovnat'
 
