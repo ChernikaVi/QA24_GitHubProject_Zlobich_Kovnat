@@ -27,6 +27,7 @@ public abstract class BaseTest {
     protected ProjectsRepositoryPage projectsRepositoryPage;
     protected CreateSuitePage createSuitePage;
     protected CreateNewTestCasePage createNewTestCasePage;
+    protected TestCaseInfo testCaseInfo;
 
     @Parameters({"browserName"})
     @BeforeClass(alwaysRun = true)
@@ -48,6 +49,7 @@ public abstract class BaseTest {
         projectsRepositoryPage = new ProjectsRepositoryPage(driver);
         createSuitePage = new CreateSuitePage(driver);
         createNewTestCasePage = new CreateNewTestCasePage(driver);
+        testCaseInfo = new TestCaseInfo(driver);
     }
 
     @AfterClass(alwaysRun = true)

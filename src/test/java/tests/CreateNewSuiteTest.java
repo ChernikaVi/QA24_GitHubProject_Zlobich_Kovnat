@@ -11,7 +11,7 @@ import utils.TestDataGenerator;
 
 public class CreateNewSuiteTest extends BaseTest{
 
-    @Test(groups = {"regression"})
+    @Test(groups = {"regression"}, dependsOnGroups = { "project.*" })
     @Description("Create new suite")
     @Link(name = "Create suite page")
     @Severity(SeverityLevel.CRITICAL)
@@ -29,7 +29,9 @@ public class CreateNewSuiteTest extends BaseTest{
         createSuitePage.fillingOutSuiteForm(suite);
         createSuitePage.clickCreateNewSuiteButton();
         Assert.assertTrue(createSuitePage.getSuccessfullyCreatedSuiteMessageIsDisplayed());
+        Assert.assertTrue(createSuitePage.isSuiteDisplayed(TestDataGenerator.dddSuiteGeneration().getSuiteTitle()));
     }
+
     @Test(groups = {"regression"}, dependsOnMethods = "createNewSuitTest")
     @Description("Edit suite")
     @Link(name = "Create suite page")
@@ -50,17 +52,18 @@ public class CreateNewSuiteTest extends BaseTest{
         Assert.assertTrue(createSuitePage.editedTitleIsDisplayed());
     }
 
-    @Test(groups = {"regression"})
+    @Test(groups = {"regression"}, dependsOnMethods = "editSuitTest")
     @Description("Delete suite")
     @Link(name = "Create suite page")
     @Severity(SeverityLevel.CRITICAL)
     public void deleteSuitTest() {
+
 
         projectsPage.clickOnProjectTitle();
         createSuitePage.isPageOpened();
         createSuitePage.clickDeleteSuiteButtonIcon();
         createSuitePage.clickDeleteSuiteButton();
         Assert.assertTrue(createSuitePage.successfullyDeletedMessageTextIsDisplayed());
-/*        createSuitePage.deletedSuiteIsNotDisplayed();*/
+        Assert.assertTrue(createSuitePage.isSuiteExist(TestDataGenerator.dddSuiteGeneration().getSuiteTitle()));
     }
 }

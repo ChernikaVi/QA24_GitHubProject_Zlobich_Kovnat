@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import utils.TestDataGenerator;
 
 public class CreateNewProjectTests extends BaseTest{
-    @Test(groups = {"smoke"})
+    @Test(groups = {"smoke", "project"})
     @Description("Positive test form of creating a project")
     @Link(name = "Create new project Page")
     @Severity(SeverityLevel.CRITICAL)
