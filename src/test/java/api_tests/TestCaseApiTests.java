@@ -3,11 +3,10 @@ package api_tests;
 import controllers.TestCaseController;
 import io.restassured.response.Response;
 import models.Case;
-import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
+
+import static org.testng.Assert.*;
 
 public class TestCaseApiTests extends BaseApiTest {
     public final static String TEST_CASE_TITLE = "Test Case for Diploma";
@@ -18,7 +17,7 @@ public class TestCaseApiTests extends BaseApiTest {
     private TestCaseController testCaseController;
 
     @BeforeTest
-    private void init() {
+    private void initCase() {
         testCaseController = new TestCaseController();
         testCase = Case.builder()
                 .title(TEST_CASE_TITLE)
@@ -34,27 +33,32 @@ public class TestCaseApiTests extends BaseApiTest {
     }
 
     @Test(priority = 1)
-    public void addTestCase() {
+    public void addTestCase() {                 //
         Case newTestCase = Case.builder()
                 .title(TEST_CASE_TITLE)
                 .description(TEST_CASE_DESCRIPTION)
                 .build();
 
         Response response = testCaseController.addTestCase(PROJECT_CODE, newTestCase);
-        int newCaseId = response.getBody()
+        boolean status = response.getBody()
+                .jsonPath()
+                .getBoolean("status");
+        int id = response.getBody()
                 .jsonPath()
                 .getInt("result.id");
-        assertNotEquals(newCaseId, caseId);
+        assertTrue(status);
+        assertNotEquals(id, 0);
     }
 
     @Test(priority = 2)
     public void getTestCase() {
         Response response = testCaseController.getTestCase(PROJECT_CODE, caseId);
-        Case actualTestCaseDescription = response
+        Case actualTestCase = response
                 .getBody()
                 .jsonPath()
                 .getObject("result", Case.class);
-        assertEquals(actualTestCaseDescription, testCase);
+        assertEquals(response.statusCode(), 200);
+        assertEquals(actualTestCase, testCase);
     }
 
     @Test(priority = 3)
@@ -67,11 +71,11 @@ public class TestCaseApiTests extends BaseApiTest {
 
         testCaseController.updateTestCase(PROJECT_CODE, caseId, newTestCase.getTitle());
         Response getResponse = testCaseController.getTestCase(PROJECT_CODE, caseId);
-        Case actualTestCaseDescription = getResponse
+        Case actualTestCase = getResponse
                 .getBody()
                 .jsonPath()
-                .getObject("result",Case.class);
-        assertEquals(actualTestCaseDescription, newTestCase);
+                .getObject("result", Case.class);
+        assertEquals(actualTestCase, newTestCase);
     }
 
     @Test(priority = 4)

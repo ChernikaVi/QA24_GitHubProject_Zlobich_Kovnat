@@ -24,19 +24,18 @@ public class DefectController extends BaseController {
                 .extract().response();
     }
 
-    public Response getDefects(String projectCode) {
+    public Response getDefect(String projectCode, int defectId) {
         return given()
                 .when()
                 .log().all()
-                .get("/v1/defect/" + projectCode)
+                .get("/v1/defect/" + projectCode + "/" + defectId)
                 .then()
                 .log().all()
-                .statusCode(SC_OK)
                 .extract().response();
     }
 
-    public Response updateDefect(String projectCode, int defectId, String newTitle) {
-        return given()
+    public void updateDefect(String projectCode, int defectId, String newTitle) {
+        given()
                 .when()
                 .body(String.format("{\"title\":\"%s\"}", newTitle))
                 .patch("v1/defect/" + projectCode + "/" + defectId)
@@ -46,11 +45,11 @@ public class DefectController extends BaseController {
                 .extract().response();
     }
 
-    public Response deleteDefect(String projectCode, int caseId) {
-        return given()
+    public void deleteDefect(String projectCode, int defectId) {
+        given()
                 .log().all()
                 .when()
-                .delete("/v1/case/" + projectCode + "/" + caseId)
+                .delete("/v1/defect/" + projectCode + "/" + defectId)
                 .then()
                 .log().all()
                 .statusCode(SC_OK)

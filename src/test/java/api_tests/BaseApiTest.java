@@ -25,7 +25,6 @@ public class BaseApiTest {
 
     }
 
-
     @AfterTest
     public void deleteProject() {
         new ProjectController().deleteProject(PROJECT_CODE);
