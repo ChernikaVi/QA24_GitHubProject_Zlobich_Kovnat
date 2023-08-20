@@ -10,10 +10,10 @@ import org.openqa.selenium.WebDriver;
 @Log4j2
 public class TestCaseInfo extends BasePage {
 
-    private final static String INPUT_LOCATOR = "//label[text()='%s']/parent::div//following-sibling::div//input";
-    private final static String DATA_PLACEHOLDER_LOCATOR = "//label[text()='%s']//parent::div//following-sibling::div//p[@class]";
-    private final static String DROPDOWN_OPTION_LOCATOR = "//label[text()='%s']//parent::div//div[@class='_ZTmUa']";
-    private final static String DATA_PLACEHOLDER_FOR_STEPS_LOCATOR = "//div[@title='%d']//parent::div/parent::div/following-sibling::div//p[text()='%s']//parent::div/parent::div/parent::div/following-sibling::div//p";
+    private final static String inputLocator = "//label[text()='%s']/parent::div//following-sibling::div//input";
+    private final static String dataPlaceholderLocator = "//label[text()='%s']//parent::div//following-sibling::div//p[@class]";
+    private final static String dropdownOptionLocator = "//label[text()='%s']//parent::div//div[@class='_ZTmUa']";
+    private final static String dataPlaceholderForStepsLocator = "//div[@title='%d']//parent::div/parent::div/following-sibling::div//p[text()='%s']//parent::div/parent::div/parent::div/following-sibling::div//p";
 
 
     private By testCaseLocator = By.xpath("//*[@data-suite-body-id]//descendant::div[@class='WVGvc_ wq7uNh']");
@@ -45,22 +45,22 @@ public class TestCaseInfo extends BasePage {
 
     public String getInputValue(String labelName) {
         log.info(String.format("getting value from input field with label name: %s", labelName));
-        return driver.findElement(By.xpath(String.format(INPUT_LOCATOR, labelName))).getAttribute("value");
+        return driver.findElement(By.xpath(String.format(inputLocator, labelName))).getAttribute("value");
     }
 
     public String getDataPlaceholderValue(String labelName) {
         log.info(String.format("getting value from data placeholder field with label name: %s", labelName));
-        return driver.findElement(By.xpath(String.format(DATA_PLACEHOLDER_LOCATOR, labelName))).getText();
+        return driver.findElement(By.xpath(String.format(dataPlaceholderLocator, labelName))).getText();
     }
 
     public String getDropdownOptionValue(String labelName) {
         log.info(String.format("getting value from dropdown field with label name: %s", labelName));
-        return driver.findElement(By.xpath(String.format(DROPDOWN_OPTION_LOCATOR, labelName))).getText();
+        return driver.findElement(By.xpath(String.format(dropdownOptionLocator, labelName))).getText();
     }
 
     public String getDataPlaceholderForStepsValue(int numberOfSteps, String labelName) {
         log.info(String.format("getting value from data placeholder for steps field with label name: %s", labelName));
-        return driver.findElement(By.xpath(String.format(DATA_PLACEHOLDER_FOR_STEPS_LOCATOR, numberOfSteps, labelName))).getText();
+        return driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, numberOfSteps, labelName))).getText();
     }
 
     public TestCase getTestCaseDetails() {
