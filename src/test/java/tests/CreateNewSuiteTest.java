@@ -58,6 +58,11 @@ public class CreateNewSuiteTest extends BaseTest{
     @Severity(SeverityLevel.CRITICAL)
     public void deleteSuitTest() {
 
+        loginPage.openPage()
+                .isPageOpened()
+                .logIn(EMAIL,PASSWORD);
+        projectsPage.isPageOpened();
+
 
         projectsPage.clickOnProjectTitle();
         createSuitePage.isPageOpened();
