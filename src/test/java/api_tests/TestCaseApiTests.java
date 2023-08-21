@@ -33,7 +33,7 @@ public class TestCaseApiTests extends BaseApiTest {
     }
 
     @Test(priority = 1)
-    public void addTestCase() {                 //
+    public void addTestCase() {
         Case newTestCase = Case.builder()
                 .title(TEST_CASE_TITLE)
                 .description(TEST_CASE_DESCRIPTION)

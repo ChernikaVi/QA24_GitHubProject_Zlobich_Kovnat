@@ -6,7 +6,7 @@ import models.Defect;
 import models.DefectResponse;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import utils.DefectSeverity;
+import enums.DefectSeverity;
 
 import static org.testng.Assert.*;
 
@@ -93,9 +93,14 @@ public class DefectApiTests extends BaseApiTest {
                 .severity(DefectSeverity.MAJOR.getStringValue())
                 .build();
 
-        defectController.updateDefect(PROJECT_CODE, defectId, updatedDefect.getTitle());
-        Response response = defectController.getDefect(PROJECT_CODE, defectId);
 
+        Response getResponse = defectController.updateDefect(PROJECT_CODE, defectId, updatedDefect.getTitle());
+        int statusCode = getResponse
+                .getStatusCode();
+        assertEquals(statusCode, 200);
+
+
+        Response response = defectController.getDefect(PROJECT_CODE, defectId);
         DefectResponse actualUpdatedDefect = response
                 .getBody()
                 .jsonPath()
