@@ -15,21 +15,17 @@ public class BaseApiTest {
 
     @BeforeTest
     public void addProject() {
-
         QaseProject project = QaseProject.builder()
                 .title(PROJECT_TITLE)
                 .code(PROJECT_CODE)
                 .description(PROJECT_DESCRIPTION)
                 .build();
         new ProjectController().addProject(project);
-
     }
 
     @AfterTest
     public void deleteProject() {
         new ProjectController().deleteProject(PROJECT_CODE);
-
-
     }
 }
 
