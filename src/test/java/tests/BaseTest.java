@@ -15,17 +15,19 @@ import java.time.Duration;
 @Listeners({InvokedListener.class})
 public abstract class BaseTest {
     protected static final String BASE_URL = PropertyReader.getProperty("base_url");
-    protected static final String USERNAME = PropertyReader.getProperty("username");
+    protected static final String EMAIL = PropertyReader.getProperty("email");
     protected static final String PASSWORD = PropertyReader.getProperty("password");
-    protected static final String ERROR_USERNAME = "raptorkost@gmal.com";
-    protected static final String ERROR_PASSWORD = "12345";
 
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected LoginPage loginPage;
     protected ProjectsPage projectsPage;
     protected CreateNewProjectPage createNewProjectPage;
-
+    protected ProjectSettingsPage projectSettingsPage;
+    protected ProjectsRepositoryPage projectsRepositoryPage;
+    protected CreateSuitePage createSuitePage;
+    protected CreateNewTestCasePage createNewTestCasePage;
+    protected TestCaseInfo testCaseInfo;
 
     @Parameters({"browserName"})
     @BeforeClass(alwaysRun = true)
@@ -43,6 +45,11 @@ public abstract class BaseTest {
         loginPage = new LoginPage(driver);
         projectsPage = new ProjectsPage(driver);
         createNewProjectPage = new CreateNewProjectPage(driver);
+        projectSettingsPage = new ProjectSettingsPage(driver);
+        projectsRepositoryPage = new ProjectsRepositoryPage(driver);
+        createSuitePage = new CreateSuitePage(driver);
+        createNewTestCasePage = new CreateNewTestCasePage(driver);
+        testCaseInfo = new TestCaseInfo(driver);
     }
 
     @AfterClass(alwaysRun = true)
