@@ -55,7 +55,7 @@ Asana, Slack, and dozens more.
 
 
 
-<img src="https://cdn-ciomg.nitrocdn.com/kxYjrZQoCHvGnKpoYnynWDSfCjSEpzTV/assets/images/optimized/rev-6fc9549/wp-content/uploads/2020/10/api-300x300.png"  height="150" /> </a>
+<img src="https://static.vecteezy.com/system/resources/previews/021/730/337/non_2x/api-icon-vector.jpg"  height="200" /> </a>
 
 
 
