@@ -24,14 +24,13 @@ public class TestCaseController extends BaseController {
 
     }
 
-    public Response getTestCase(String projectCode) {
+    public Response getTestCase(String projectCode, int caseId) {
         return given()
                 .when()
                 .log().all()
-                .get("/v1/case/" + projectCode)
+                .get("/v1/case/" + projectCode + "/" + caseId)
                 .then()
                 .log().all()
-                .statusCode(SC_OK)
                 .extract().response();
     }
 

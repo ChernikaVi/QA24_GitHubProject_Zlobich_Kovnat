@@ -12,11 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Case {
-    @SerializedName("title")
-    private String title;
+public class DefectResponse {
     @SerializedName("id")
     private int id;
-    @SerializedName("description")
-    private String description;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("actual_result")
+    private String actual_result;
+    @SerializedName("severity")
+    private String severity;
 }

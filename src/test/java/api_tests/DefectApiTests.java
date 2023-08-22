@@ -1,57 +1,120 @@
 package api_tests;
 
 import controllers.DefectController;
-import controllers.TestCaseController;
 import io.restassured.response.Response;
 import models.Defect;
-import org.testng.Assert;
+import models.DefectResponse;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import enums.DefectSeverity;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class DefectApiTests extends BaseApiTest {
-
-    public final static int DEFECT_ID = 1;
     public final static String NEW_DEFECT_TITLE = "NEW DEFECT TITLE";
     public final static String DEFECT_TITLE = "New test defect";
+    public final static String DEFECT_RESULT = "Actual result";
+    private int defectId;
+    private DefectController defectController;
 
-
-    @Test(priority = 1)
-    public void addDefect() {
-
+    @BeforeTest
+    public void initDefect() {
+        defectController = new DefectController();
         Defect defect = Defect.builder()
                 .title(DEFECT_TITLE)
-                .code(PROJECT_CODE)
-                .id(DEFECT_ID)
-                .severity(3)
-                .actual_result("Actual result")
+                .severity(DefectSeverity.MAJOR.getIntValue())
+                .actual_result(DEFECT_RESULT)
                 .build();
 
-        Response response = new DefectController().addDefect(PROJECT_CODE, defect);
-        assertEquals(response.statusCode(), 200);
-        int actualDefectId = response
+        Response response = defectController.addDefect(PROJECT_CODE, defect);
+        defectId = response
                 .getBody()
                 .jsonPath()
                 .getInt("result.id");
-        assertEquals(actualDefectId, DEFECT_ID);
+        defect.setId(defectId);
+    }
 
+    @Test(priority = 1)
+    public void addDefect() {
+        Defect newDefect = Defect.builder()
+                .title(DEFECT_TITLE)
+                .severity(DefectSeverity.MAJOR.getIntValue())
+                .actual_result(DEFECT_RESULT)
+                .build();
+
+        Response defectResponse = defectController
+                .addDefect(PROJECT_CODE, newDefect);
+
+        int newDefectId = defectResponse
+                .getBody()
+                .jsonPath()
+                .getInt("result.id");
+
+        boolean status = defectResponse.getBody()
+                .jsonPath()
+                .getBoolean("status");
+        assertTrue(status);
+        assertNotNull(newDefectId);
     }
 
     @Test(priority = 2)
-    public void getDefects() {
-        int statusCode = new DefectController().getDefects(PROJECT_CODE).statusCode();
-        assertEquals(statusCode, 200);
+    public void getDefect() {
+        DefectResponse expectedDefect = DefectResponse.builder()
+                .id(defectId)
+                .title(DEFECT_TITLE)
+                .actual_result(DEFECT_RESULT)
+                .severity(DefectSeverity.MAJOR.getStringValue())
+                .build();
+
+        Response response = defectController
+                .getDefect(PROJECT_CODE, defectId);
+
+        DefectResponse actualDefect = response
+                .getBody()
+                .jsonPath()
+                .getObject("result", DefectResponse.class);
+
+        assertEquals(actualDefect, expectedDefect);
     }
 
     @Test(priority = 3)
     public void updateDefect() {
-        int statusCode = new DefectController().updateDefect(PROJECT_CODE, DEFECT_ID, NEW_DEFECT_TITLE).statusCode();
+        Defect updatedDefect = Defect.builder()
+                .title(NEW_DEFECT_TITLE)
+                .id(defectId)
+                .actual_result(DEFECT_RESULT)
+                .severity(DefectSeverity.MAJOR.getIntValue())
+                .build();
+
+        DefectResponse expectedUpdatedDefect = DefectResponse.builder()
+                .id(defectId)
+                .title(NEW_DEFECT_TITLE)
+                .actual_result(DEFECT_RESULT)
+                .severity(DefectSeverity.MAJOR.getStringValue())
+                .build();
+
+
+        Response getResponse = defectController.updateDefect(PROJECT_CODE, defectId, updatedDefect.getTitle());
+        int statusCode = getResponse
+                .getStatusCode();
         assertEquals(statusCode, 200);
+
+
+        Response response = defectController.getDefect(PROJECT_CODE, defectId);
+        DefectResponse actualUpdatedDefect = response
+                .getBody()
+                .jsonPath()
+                .getObject("result", DefectResponse.class);
+
+        assertEquals(actualUpdatedDefect, expectedUpdatedDefect);
     }
+
     @Test(priority = 4)
-    public void deleteCaseTest() {
-        int statusCode = new DefectController().deleteDefect(PROJECT_CODE, DEFECT_ID).statusCode();
-        Assert.assertEquals(statusCode, 200);
+    public void deleteDefect() {
+        defectController.deleteDefect(PROJECT_CODE, defectId);
+        Response getResponse = defectController.getDefect(PROJECT_CODE, defectId);
+        int statusCode = getResponse
+                .getStatusCode();
+        assertEquals(statusCode, 404);
     }
 }
-
