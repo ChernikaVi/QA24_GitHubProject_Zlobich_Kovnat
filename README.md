@@ -82,7 +82,11 @@ Asana, Slack, and dozens more.
 * Loadable Page 
 
 # Test running and reporting:
-* Change data in config.properties tab on your own
+Instructions for running tests:
+
+Smoke Tests: mvn clean test -DsuiteXmlFile = "smokeTests.xml"
+Regression Tests: mvn clean test -DsuiteXmlFile = "regressionTests.xml"
+Smoke API Tests: mvn clean test -DsuiteXmlFile = "smokeApiTests.xml"
 
 
 
