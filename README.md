@@ -45,7 +45,7 @@ Asana, Slack, and dozens more.
 ---
 
 
-# Checklist:  
+# Checklist:   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-2zxrPS-jxOUT69kT4EX_KT8EhdK8mbqYVA&usqp=CAU"  height="50" /> </a>
 
 * Create new Project (Positive & negative tests)
 * Create new Test Case 
@@ -55,12 +55,12 @@ Asana, Slack, and dozens more.
 
 
 
-<img src="https://static.vecteezy.com/system/resources/previews/021/730/337/non_2x/api-icon-vector.jpg"  height="200" /> </a>
 
 
 
 
-## API Tests:
+
+## API Tests: <img src="https://static.vecteezy.com/system/resources/previews/021/730/337/non_2x/api-icon-vector.jpg"  height="200" /> </a>
 
 * **Defect**                            
     * Create a new defect.
