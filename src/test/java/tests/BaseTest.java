@@ -33,8 +33,6 @@ public abstract class BaseTest {
     @BeforeClass(alwaysRun = true)
     public void setUp(@Optional("chrome") String browserName, ITestContext context) throws Exception {
         if (browserName.equals("chrome")) {
-            ChromeOptions options = new ChromeOptions();
-            options.setBrowserVersion("114");
             driver = new ChromeDriver();
         } else if (browserName.equals("firefox")) {
             driver = new FirefoxDriver();
