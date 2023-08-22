@@ -81,12 +81,12 @@ Asana, Slack, and dozens more.
 * Builder 
 * Loadable Page 
 
-# Test running and reporting:
+# Test running:
 Instructions for running tests:
 
-Smoke Tests: mvn clean test -DsuiteXmlFile = "smokeTests.xml"
-Regression Tests: mvn clean test -DsuiteXmlFile = "regressionTests.xml"
-Smoke API Tests: mvn clean test -DsuiteXmlFile = "smokeApiTests.xml"
+* Smoke Tests: mvn clean test -DsuiteXmlFile = "smokeTests.xml"
+* Regression Tests: mvn clean test -DsuiteXmlFile = "regressionTests.xml"
+* Smoke API Tests: mvn clean test -DsuiteXmlFile = "smokeApiTests.xml"
 
 
 
