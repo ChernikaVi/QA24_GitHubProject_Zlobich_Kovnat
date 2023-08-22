@@ -60,7 +60,7 @@ Asana, Slack, and dozens more.
 
 
 
-## API Tests: <img src="https://static.vecteezy.com/system/resources/previews/021/730/337/non_2x/api-icon-vector.jpg"  height="200" /> </a>
+## API Tests: <img src="https://static.vecteezy.com/system/resources/previews/021/730/337/non_2x/api-icon-vector.jpg"  height="70" /> </a>
 
 * **Defect**                            
     * Create a new defect.
