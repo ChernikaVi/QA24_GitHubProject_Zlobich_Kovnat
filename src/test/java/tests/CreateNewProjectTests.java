@@ -6,25 +6,25 @@ import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
 import models.Project;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.TestDataGenerator;
 
-public class CreateNewProjectTests extends BaseTest{
-    @Test(groups = {"smoke", "project"})
+public class CreateNewProjectTests extends BaseTest {
+    @BeforeMethod(alwaysRun = true)
+    public void loginAndClickCreateProject() {
+        loginPage.openPage()
+                .isPageOpened()
+                .logIn(EMAIL, PASSWORD);
+        projectsPage.clickCreateNewProjectButton();
+    }
+
+    @Test(groups = {"smoke"})
     @Description("Positive test form of creating a project")
     @Link(name = "Create new project Page")
     @Severity(SeverityLevel.CRITICAL)
     public void createNewProjectPositiveTest() {
         Project actualProject = TestDataGenerator.positiveAddProjectGeneration();
-
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(EMAIL,PASSWORD);
-        Assert.assertTrue(projectsPage.isCreateProjectButtonDisplayed());
-
-        projectsPage.clickCreateNewProjectButton();
-        Assert.assertTrue(projectsPage.isCreateProjectFormDisplayed());
-
         createNewProjectPage.isPageOpened()
                 .fillingOutProjectForm(actualProject);
         createNewProjectPage.clickOnPrivateRadioButton();
@@ -40,15 +40,6 @@ public class CreateNewProjectTests extends BaseTest{
     @Severity(SeverityLevel.CRITICAL)
     public void createNewProjectNegativeTest() {
         Project actualProject = TestDataGenerator.negativeAddProjectGeneration();
-
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(EMAIL,PASSWORD);
-        Assert.assertTrue(projectsPage.isCreateProjectButtonDisplayed());
-
-        projectsPage.clickCreateNewProjectButton();
-        Assert.assertTrue(projectsPage.isCreateProjectFormDisplayed());
-
         createNewProjectPage.isPageOpened()
                 .fillingOutProjectForm(actualProject);
         createNewProjectPage.clickOnPrivateRadioButton();

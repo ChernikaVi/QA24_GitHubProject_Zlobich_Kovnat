@@ -11,39 +11,29 @@ import utils.TestDataGenerator;
 
 public class CreateNewSuiteTest extends BaseTest{
 
-    @Test(groups = {"regression"}, dependsOnGroups = { "project.*" })
+    @Test(groups = {"regression"})
     @Description("Create new suite")
     @Link(name = "Create suite page")
     @Severity(SeverityLevel.CRITICAL)
     public void createNewSuitTest() {
-        Suite suite = TestDataGenerator.dddSuiteGeneration();
-
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(EMAIL,PASSWORD);
+        Suite suite = TestDataGenerator.addSuiteGeneration();
         projectsPage.isPageOpened();
-
         projectsPage.clickOnProjectTitle();
         createSuitePage.isPageOpened()
                 .clickCreateSuiteButton();
         createSuitePage.fillingOutSuiteForm(suite);
         createSuitePage.clickCreateNewSuiteButton();
         Assert.assertTrue(createSuitePage.getSuccessfullyCreatedSuiteMessageIsDisplayed());
-        Assert.assertTrue(createSuitePage.isSuiteDisplayed(TestDataGenerator.dddSuiteGeneration().getSuiteTitle()));
+        Assert.assertTrue(createSuitePage.isSuiteExistAndDisplayed(TestDataGenerator.addSuiteGeneration().getSuiteTitle()));
     }
 
-    @Test(groups = {"regression"}, dependsOnMethods = "createNewSuitTest")
+    @Test(groups = {"regression"})
     @Description("Edit suite")
     @Link(name = "Create suite page")
     @Severity(SeverityLevel.CRITICAL)
     public void editSuitTest() {
         Suite suite = TestDataGenerator.editSuiteGeneration();
-
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(EMAIL,PASSWORD);
         projectsPage.isPageOpened();
-
         projectsPage.clickOnProjectTitle();
         createSuitePage.isPageOpened();
         createSuitePage.clickEditSuiteButtonIcon();
@@ -52,23 +42,17 @@ public class CreateNewSuiteTest extends BaseTest{
         Assert.assertTrue(createSuitePage.editedTitleIsDisplayed());
     }
 
-    @Test(groups = {"regression"}, dependsOnMethods = "editSuitTest")
+    @Test(groups = {"regression"})
     @Description("Delete suite")
     @Link(name = "Create suite page")
     @Severity(SeverityLevel.CRITICAL)
     public void deleteSuitTest() {
-
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(EMAIL,PASSWORD);
         projectsPage.isPageOpened();
-
-
         projectsPage.clickOnProjectTitle();
         createSuitePage.isPageOpened();
         createSuitePage.clickDeleteSuiteButtonIcon();
         createSuitePage.clickDeleteSuiteButton();
         Assert.assertTrue(createSuitePage.successfullyDeletedMessageTextIsDisplayed());
-        Assert.assertTrue(createSuitePage.isSuiteExist(TestDataGenerator.dddSuiteGeneration().getSuiteTitle()));
+        Assert.assertTrue(createSuitePage.isSuiteExistAndDisplayed(TestDataGenerator.addSuiteGeneration().getSuiteTitle()));
     }
 }
