@@ -12,7 +12,7 @@ public class TestDataGenerator {
     public static Project positiveAddProjectGeneration() {
         return Project.builder()
                 .setName(faker.animal().name() + faker.number().randomDigit())
-                .setCode("5555")
+                .setCode(String.valueOf(faker.number().randomDigit()))
                 .setDescription(faker.currency().name() + faker.number().randomDigit())
                 .build();
     }
