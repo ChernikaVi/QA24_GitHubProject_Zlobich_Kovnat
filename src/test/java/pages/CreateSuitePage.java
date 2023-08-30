@@ -33,6 +33,7 @@ public class CreateSuitePage extends BasePage {
     private By successfullyDeletedMessageText = By.xpath("//*[text()='Suite was successfully deleted.']");
 
 
+
     public CreateSuitePage(WebDriver driver) {
         super(driver);
     }
