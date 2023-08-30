@@ -8,7 +8,6 @@ import models.Suite;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class CreateSuitePage extends BasePage {
 
     @Override
     public CreateSuitePage isPageOpened() {
-        wait.until(ExpectedConditions.elementToBeClickable(createSuiteButtonLocator));
+        waitForElementClickable(createSuiteButtonLocator);
         return this;
     }
 
@@ -103,7 +102,7 @@ public class CreateSuitePage extends BasePage {
         return driver.findElement(successfullyDeletedMessageText).isDisplayed();
     }
 
-    @Step("Checking the existence of the suite with title '{suiteTitle}'")
+/*    @Step("Checking the existence of the suite with title '{suiteTitle}'")
     public boolean isSuiteExist(String suiteTitle) {
         List<WebElement> suitesList = driver.findElements(allSuites);
         for (WebElement suite : suitesList) {
@@ -121,6 +120,17 @@ public class CreateSuitePage extends BasePage {
             if (suite.getText().equals(suiteTitle)) {
             }
             return true;
+        }
+        return false;
+    }*/
+
+    @Step("Checking the existence and visibility of the suite with title '{suiteTitle}'")
+    public boolean isSuiteExistAndDisplayed(String suiteTitle) {
+        List<WebElement> suitesList = driver.findElements(allSuites);
+        for (WebElement suite : suitesList) {
+            if (suite.getText().equals(suiteTitle)) {
+                return true;
+            }
         }
         return false;
     }

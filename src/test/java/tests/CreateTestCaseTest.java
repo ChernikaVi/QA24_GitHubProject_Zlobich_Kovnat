@@ -17,12 +17,7 @@ public class CreateTestCaseTest extends BaseTest{
     @Severity(SeverityLevel.CRITICAL)
     public void positiveCreateNewTestCaseTest() {
         TestCase testCase = TestDataGenerator.createTestCaseGeneration();
-
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(EMAIL,PASSWORD);
         projectsPage.isPageOpened();
-
         projectsPage.clickOnProjectTitle();
         createSuitePage.isPageOpened();
         projectsPage.clickCreateNewTestCaseButton();

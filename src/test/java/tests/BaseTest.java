@@ -1,4 +1,5 @@
 package tests;
+import models.Project;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,6 +10,7 @@ import org.testng.annotations.*;
 import pages.*;
 import utils.InvokedListener;
 import utils.PropertyReader;
+import utils.TestDataGenerator;
 
 import java.time.Duration;
 
@@ -67,5 +69,19 @@ public abstract class BaseTest {
         driver.manage().deleteAllCookies();
         ((JavascriptExecutor) driver).executeScript(String.format("window.localStorage.clear();"));
         ((JavascriptExecutor) driver).executeScript(String.format("window.sessionStorage.clear();"));
+    }
+
+    @BeforeSuite(alwaysRun = true)
+    public void createNewProject(){
+        Project project = TestDataGenerator.positiveAddProjectGeneration();
+        loginPage.openPage()
+                .isPageOpened()
+                .logIn(EMAIL, PASSWORD);
+        projectsPage.clickCreateNewProjectButton();
+        createNewProjectPage.isPageOpened()
+                .fillingOutProjectForm(project);
+        createNewProjectPage.clickOnPrivateRadioButton();
+        createNewProjectPage.clickOnProjectButton();
+        createNewProjectPage.clickAllProjectsButton();
     }
 }

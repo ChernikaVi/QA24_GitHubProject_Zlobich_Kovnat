@@ -22,7 +22,7 @@ public class ProjectSettingsPage extends BasePage{
 
     @Override
     public ProjectSettingsPage isPageOpened() {
-        wait.until(ExpectedConditions.elementToBeClickable(deleteProjectButtonLocator));
+        waitForElementClickable(deleteProjectButtonLocator);
         return this;
     }
 

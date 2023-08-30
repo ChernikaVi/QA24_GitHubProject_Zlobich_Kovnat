@@ -1,11 +1,9 @@
 package pages;
 
 import io.qameta.allure.Step;
-import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.TestDataGenerator;
 
 public class ProjectsPage extends BasePage {
     public ProjectsPage(WebDriver driver) {
@@ -14,7 +12,7 @@ public class ProjectsPage extends BasePage {
 
     private By createNewProjectButtonLocator = By.cssSelector("#createButton");
     private By createProjectFormLocator = By.cssSelector(".ReactModal__Content");
-    private By projectTitleLocator = By.xpath("//a[contains(@class,'defect-title')]");
+    private By projectTitleLocator = By.xpath("//a[contains(@class,'defect-title') and contains(text(), '%s')]");
     private By createNewTestCaseButtonLocator = By.cssSelector("#create-case-button");
 
     @Override

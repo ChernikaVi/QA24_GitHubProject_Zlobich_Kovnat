@@ -1,16 +1,19 @@
 package utils;
+
+import com.github.javafaker.Faker;
 import enums.*;
 import models.Project;
 import models.Suite;
 import models.TestCase;
 
 public class TestDataGenerator {
+    static Faker faker = new Faker();
 
     public static Project positiveAddProjectGeneration() {
         return Project.builder()
-                .setName("My first project")
+                .setName(faker.animal().name() + faker.number().randomDigit())
                 .setCode("5555")
-                .setDescription("There are my test cases")
+                .setDescription(faker.currency().name() + faker.number().randomDigit())
                 .build();
     }
 
@@ -18,23 +21,23 @@ public class TestDataGenerator {
         return Project.builder()
                 .setName("")
                 .setCode("5555")
-                .setDescription("There are my test cases")
+                .setDescription(faker.currency().name() + faker.number().randomDigit())
                 .build();
     }
 
-    public static Suite dddSuiteGeneration() {
+    public static Suite addSuiteGeneration() {
         return Suite.builder()
-                .setSuiteTitle("My suite")
-                .setSuiteDescription("Creating new suite")
-                .setPreconditions("Open projects page")
+                .setSuiteTitle(faker.currency().name() + faker.number().randomDigit())
+                .setSuiteDescription(faker.app().version())
+                .setPreconditions(faker.country().name() + faker.number().randomDigit())
                 .build();
     }
 
     public static Suite editSuiteGeneration() {
         return Suite.builder()
-                .setSuiteTitle("My suite 1")
-                .setSuiteDescription("Creating new suite")
-                .setPreconditions("Open projects page")
+                .setSuiteTitle(faker.country().name() + faker.number().randomDigit())
+                .setSuiteDescription(faker.app().version())
+                .setPreconditions(faker.app().version())
                 .build();
     }
 
