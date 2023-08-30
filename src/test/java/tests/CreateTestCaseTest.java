@@ -57,5 +57,10 @@ public class CreateTestCaseTest extends BaseTest {
         createNewTestCasePage.fillingOutTestCaseForm(testCase);
         createNewTestCasePage.clickAddAttachmentButton();
         createNewTestCasePage.uploadFile(filePath);
+        Assert.assertTrue(createNewTestCasePage.successfullyUploadedFileIsDisplayed());
+        createNewTestCasePage.clickCancelCaseButton();
+        createNewTestCasePage.clickCancelAllertButton();
+        createNewTestCasePage.clickSaveCaseButton();
+        Assert.assertTrue(createNewTestCasePage.successfullyCreatedTestCaseMessageIsDisplayed());
     }
 }
