@@ -6,15 +6,19 @@ import lombok.extern.log4j.Log4j2;
 import models.TestCase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Log4j2
 public class CreateNewTestCasePage extends BaseElement {
+    WebDriverWait wait;
 
     private By addStepButtonLocator = By.xpath("//*[text()=' Add step']");
     private By saveButtonLocator = By.cssSelector("#save-case");
     private By successfullyCreatedTestCaseMessage = By.xpath("//*[text()='Test case was created successfully!']");
     private By uploadAttachmentsLocator = By.xpath("//*[text()='Add attachment']");
     private By uploadNewAttachmentsLocator = By.cssSelector(".attach-new-form");
+    private By addAttachmentButton = By.xpath("//button[@class = 'pMNB6M']");
+    private By fileInputLocator = By.xpath("//form[@enctype = 'multipart/form-data']");
 
 
     public CreateNewTestCasePage(WebDriver driver) {
@@ -27,15 +31,18 @@ public class CreateNewTestCasePage extends BaseElement {
         scrollToElement(driver.findElement(addStepButtonLocator));
         driver.findElement(addStepButtonLocator).click();
     }
+
     @Step
     public void clickSaveCaseButton() {
         log.info("clicking save test case button");
         driver.findElement(saveButtonLocator).click();
     }
+
     @Step
     public boolean successfullyCreatedTestCaseMessageIsDisplayed() {
         return driver.findElement(successfullyCreatedTestCaseMessage).isDisplayed();
     }
+
     @Step("Filling out test case")
     public void fillingOutTestCaseForm(TestCase testCase) {
         log.info("Filling values into the create new test case page");
@@ -54,5 +61,14 @@ public class CreateNewTestCasePage extends BaseElement {
         new DataPlaceholderForSteps(driver, 1, "Step Action").setDataPlaceholderForStepsValue(testCase.getStepAction());
         new DataPlaceholderForSteps(driver, 1, "Data").setDataPlaceholderForStepsValue(testCase.getData());
         new DataPlaceholderForSteps(driver, 1, "Expected result").setDataPlaceholderForStepsValue(testCase.getExpectedResult());
+    }
+    public void clickAddAttachmentButton(){
+        driver.findElement(addAttachmentButton).click();
+    }
+
+    @Step("Uploading file")
+    public void uploadFile(String filePath) {
+        log.info("Uploading file");
+        driver.findElement(fileInputLocator).sendKeys(filePath);
     }
 }
