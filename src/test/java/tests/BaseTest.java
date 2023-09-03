@@ -75,18 +75,4 @@ public abstract class BaseTest {
         ((JavascriptExecutor) driver).executeScript(String.format("window.localStorage.clear();"));
         ((JavascriptExecutor) driver).executeScript(String.format("window.sessionStorage.clear();"));
     }
-
-/*  @BeforeSuite(alwaysRun = true)
-    public void createNewProject(){
-        Project project = TestDataGenerator.positiveAddProjectGeneration();
-        loginPage.openPage()
-                .isPageOpened()
-                .logIn(EMAIL, PASSWORD);
-        projectsPage.clickCreateNewProjectButton();
-        createNewProjectPage.isPageOpened()
-                .fillingOutProjectForm(project);
-        createNewProjectPage.clickOnPrivateRadioButton();
-        createNewProjectPage.clickOnProjectButton();
-        createNewProjectPage.clickAllProjectsButton();
-    }*/
 }

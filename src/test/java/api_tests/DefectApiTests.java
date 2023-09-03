@@ -4,7 +4,7 @@ import controllers.DefectController;
 import io.restassured.response.Response;
 import models.Defect;
 import models.DefectResponse;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import enums.DefectSeverity;
 
@@ -14,10 +14,9 @@ public class DefectApiTests extends BaseApiTest {
     public final static String NEW_DEFECT_TITLE = "NEW DEFECT TITLE";
     public final static String DEFECT_TITLE = "New test defect";
     public final static String DEFECT_RESULT = "Actual result";
-    private int defectId;
-    private DefectController defectController;
 
-    @BeforeTest
+
+    @BeforeMethod
     public void initDefect() {
         defectController = new DefectController();
         Defect defect = Defect.builder()

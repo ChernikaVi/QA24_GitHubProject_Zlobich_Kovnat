@@ -8,6 +8,7 @@ import models.Suite;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -90,6 +91,7 @@ public class CreateSuitePage extends BasePage {
 
     @Step
     public void clickDeleteSuiteButtonIcon() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("HW_badge")));
         driver.findElement(deleteSuiteIconLocator).click();
     }
 

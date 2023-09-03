@@ -17,7 +17,7 @@ public class TestCaseInfo extends BasePage {
 
 
     private By testCaseLocator = By.xpath("//*[@data-suite-body-id]//descendant::div[@class='WVGvc_ wq7uNh']");
-    private By editTestCaseButtonLocator = By.cssSelector(".fa-pencil");
+    private By editTestCaseButtonLocator = By.xpath("//*[@class='NXiZp9 pEVOiF']//descendant::*[@class='far fa-pencil']");
 
     public TestCaseInfo(WebDriver driver) {
         super(driver);

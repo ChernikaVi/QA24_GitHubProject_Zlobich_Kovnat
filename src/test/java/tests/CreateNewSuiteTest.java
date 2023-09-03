@@ -19,11 +19,6 @@ public class CreateNewSuiteTest extends BaseTest {
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(EMAIL, PASSWORD);
-        projectsPage.clickCreateNewProjectButton();
-        createNewProjectPage.fillingOutProjectForm(project);
-        createNewProjectPage.clickOnPrivateRadioButton();
-        createNewProjectPage.clickOnProjectButton();
-        createNewProjectPage.clickAllProjectsButton();
     }
 
     @Test(groups = {"regression"})
@@ -68,6 +63,6 @@ public class CreateNewSuiteTest extends BaseTest {
         createSuitePage.clickDeleteSuiteButtonIcon();
         createSuitePage.clickDeleteSuiteButton();
         Assert.assertTrue(createSuitePage.successfullyDeletedMessageTextIsDisplayed());
-        Assert.assertTrue(createSuitePage.isSuiteExist(TestDataGenerator.addSuiteGeneration().getSuiteTitle()));
+        Assert.assertFalse(createSuitePage.isSuiteExist(TestDataGenerator.addSuiteGeneration().getSuiteTitle()));
     }
 }

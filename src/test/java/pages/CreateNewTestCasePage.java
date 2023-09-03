@@ -18,6 +18,8 @@ public class CreateNewTestCasePage extends BasePage {
     private By addAttachmentButtonLocator = By.xpath("//*[text()='Add attachment']");
     private By uploadNewAttachmentsLocator = By.cssSelector(".attach-new-form");
     private By cancelButtonLocator = By.xpath("//*[text()='Cancel']");
+    private By avatarButtonLocator = By.xpath("//*[@id='layout']//child::span[@class='KDFykF']");
+    private By signOutButtonLocator = By.xpath("//span[text()='Sign out']");
     private By fileInputLocator = By.cssSelector("input[type=file]");
     private By qasePhotoLocator = By.xpath("//span[text()='733.88 KB']");
     private By cancelAllertButtonLocator = By.xpath("//span[text()='Cancel']//ancestor::*[@type='button']");
@@ -63,6 +65,18 @@ public class CreateNewTestCasePage extends BasePage {
         driver.findElement(cancelAllertButtonLocator).click();
     }
 
+    @Step
+    public void clickAvatarButton() {
+        log.info("clicking avatar button");
+        driver.findElement(avatarButtonLocator).click();
+    }
+
+    @Step
+    public void clickSignOutButton() {
+        log.info("clicking Sign Out button");
+        driver.findElement(signOutButtonLocator).click();
+    }
+
 
     @Step
     public boolean successfullyCreatedTestCaseMessageIsDisplayed() {
@@ -100,7 +114,7 @@ public class CreateNewTestCasePage extends BasePage {
 
     @Step("Uploading file")
     public void uploadFile(String filePath) {
-        log.info("Uploading photo with title '{qase.png}'");
+        log.info("Uploading file: '{filePath}");
         driver.findElement(fileInputLocator).sendKeys(filePath);
     }
 }
