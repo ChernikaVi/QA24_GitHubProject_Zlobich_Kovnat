@@ -14,6 +14,7 @@ public class DefectApiTests extends BaseApiTest {
     public final static String NEW_DEFECT_TITLE = "NEW DEFECT TITLE";
     public final static String DEFECT_TITLE = "New test defect";
     public final static String DEFECT_RESULT = "Actual result";
+    protected int defectId;
 
 
     @BeforeMethod

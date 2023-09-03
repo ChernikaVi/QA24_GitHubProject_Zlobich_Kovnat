@@ -4,7 +4,6 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
-import models.Project;
 import models.TestCase;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;

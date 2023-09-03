@@ -76,6 +76,7 @@ public class CreateSuitePage extends BasePage {
 
     @Step
     public void clickEditSuiteButtonIcon() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("HW_badge")));
         driver.findElement(editSuiteIconLocator).click();
     }
 
@@ -104,7 +105,7 @@ public class CreateSuitePage extends BasePage {
     public boolean successfullyDeletedMessageTextIsDisplayed() {
         return driver.findElement(successfullyDeletedMessageText).isDisplayed();
     }
-
+/*
     @Step("Checking the existence of the suite with title '{suiteTitle}'")
     public boolean isSuiteExist(String suiteTitle) {
         List<WebElement> suitesList = driver.findElements(allSuites);
@@ -125,5 +126,16 @@ public class CreateSuitePage extends BasePage {
             return true;
         }
         return false;
+    }*/
+
+    @Step("Checking the existence and visibility of the suite with title '{suiteTitle}'")
+    public boolean isSuiteExistAndDisplayed(String suiteTitle) {
+        List<WebElement> suitesList = driver.findElements(allSuites);
+        for (WebElement suite : suitesList) {
+            if (suite.getText().equals(suiteTitle)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
