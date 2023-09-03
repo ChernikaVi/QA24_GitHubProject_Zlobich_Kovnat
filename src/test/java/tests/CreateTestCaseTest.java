@@ -4,7 +4,6 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
-import models.Project;
 import models.TestCase;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -17,15 +16,9 @@ public class CreateTestCaseTest extends BaseTest {
     private String filePath = System.getProperty("user.dir") + "/src/test/resources/qase.png";
     @BeforeMethod(alwaysRun = true)
     public void createNewProject() {
-        Project project = TestDataGenerator.positiveAddProjectGeneration();
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(EMAIL, PASSWORD);
-        projectsPage.clickCreateNewProjectButton();
-        createNewProjectPage.fillingOutProjectForm(project);
-        createNewProjectPage.clickOnPrivateRadioButton();
-        createNewProjectPage.clickOnProjectButton();
-        createNewProjectPage.clickAllProjectsButton();
     }
 
     @Test(groups = {"smoke"})
@@ -62,5 +55,7 @@ public class CreateTestCaseTest extends BaseTest {
         createNewTestCasePage.clickCancelAllertButton();
         createNewTestCasePage.clickSaveCaseButton();
         Assert.assertTrue(createNewTestCasePage.successfullyCreatedTestCaseMessageIsDisplayed());
+        createNewTestCasePage.clickAvatarButton();
+        createNewTestCasePage.clickSignOutButton();
     }
 }

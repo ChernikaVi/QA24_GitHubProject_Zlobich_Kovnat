@@ -3,6 +3,7 @@ package api_tests;
 import controllers.TestCaseController;
 import io.restassured.response.Response;
 import models.Case;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -16,8 +17,8 @@ public class TestCaseApiTests extends BaseApiTest {
     private Case testCase;
     private TestCaseController testCaseController;
 
-    @BeforeTest
-    private void initCase() {
+    @BeforeMethod(alwaysRun = true)
+    protected void initCase() {
         testCaseController = new TestCaseController();
         testCase = Case.builder()
                 .title(TEST_CASE_TITLE)

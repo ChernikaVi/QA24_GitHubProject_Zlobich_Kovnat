@@ -19,7 +19,7 @@ public class CreateNewProjectTests extends BaseTest {
         projectsPage.clickCreateNewProjectButton();
     }
 
-    @Test(groups = {"smoke", "project"})
+    @Test(groups = {"smoke"})
     @Description("Positive test form of creating a project")
     @Link(name = "Create new project Page")
     @Severity(SeverityLevel.CRITICAL)
