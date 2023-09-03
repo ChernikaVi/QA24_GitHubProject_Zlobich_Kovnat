@@ -105,28 +105,6 @@ public class CreateSuitePage extends BasePage {
     public boolean successfullyDeletedMessageTextIsDisplayed() {
         return driver.findElement(successfullyDeletedMessageText).isDisplayed();
     }
-/*
-    @Step("Checking the existence of the suite with title '{suiteTitle}'")
-    public boolean isSuiteExist(String suiteTitle) {
-        List<WebElement> suitesList = driver.findElements(allSuites);
-        for (WebElement suite : suitesList) {
-            if (suite.getText().equals(suiteTitle)) {
-            }
-            return false;
-        }
-        return true;
-    }
-
-    @Step("Checking the existence of the suite with title '{suiteTitle}'")
-    public boolean isSuiteDisplayed(String suiteTitle) {
-        List<WebElement> suitesList = driver.findElements(allSuites);
-        for (WebElement suite : suitesList) {
-            if (suite.getText().equals(suiteTitle)) {
-            }
-            return true;
-        }
-        return false;
-    }*/
 
     @Step("Checking the existence and visibility of the suite with title '{suiteTitle}'")
     public boolean isSuiteExistAndDisplayed(String suiteTitle) {
