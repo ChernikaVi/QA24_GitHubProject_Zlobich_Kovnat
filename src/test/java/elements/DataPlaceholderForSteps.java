@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 @Log4j2
 public class DataPlaceholderForSteps extends BaseElement {
 
-    private String dataPlaceholderForStepsLocator = "//div[@title='%d']//parent::div/parent::div/following-sibling::div//p[@data-placeholder='%s']";
+    private String dataPlaceholderForStepsLocator = "//div[@class='case-create-block steps-block']//parent::div/parent::div/following-sibling::div//p[@data-placeholder]";
     private int title;
     private String itemName;
 

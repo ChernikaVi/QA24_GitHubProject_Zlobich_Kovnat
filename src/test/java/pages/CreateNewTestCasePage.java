@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import models.TestCase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Log4j2
@@ -18,10 +19,10 @@ public class CreateNewTestCasePage extends BasePage {
     private By addAttachmentButtonLocator = By.xpath("//*[text()='Add attachment']");
     private By uploadNewAttachmentsLocator = By.cssSelector(".attach-new-form");
     private By cancelButtonLocator = By.xpath("//*[text()='Cancel']");
-    private By avatarButtonLocator = By.xpath("//*[@id='layout']//child::span[@class='KDFykF']");
+    private By avatarButtonLocator = By.xpath("//*[@aria-label='Chat']//following-sibling::*");
     private By signOutButtonLocator = By.xpath("//span[text()='Sign out']");
     private By fileInputLocator = By.cssSelector("input[type=file]");
-    private By qasePhotoLocator = By.xpath("//span[text()='733.88 KB']");
+    private By qasePhotoLocator = By.xpath("//*[@class='case-create-block'][text()='Attachments']//following::a");
     private By cancelAllertButtonLocator = By.xpath("//span[text()='Cancel']//ancestor::*[@type='button']");
 
 
