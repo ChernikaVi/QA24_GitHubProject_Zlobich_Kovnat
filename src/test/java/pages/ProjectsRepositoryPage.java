@@ -12,7 +12,7 @@ public class ProjectsRepositoryPage extends BasePage{
 
     private By createSuiteButtonLocator = By.cssSelector("#create-suite-button");
     private By createCaseButtonLocator = By.cssSelector("#create-case-button");
-    private By settingsButtonLocator = By.xpath("//*[@title='Settings']");
+    private By settingsButtonLocator = By.xpath("//*[@aria-label='Settings']");
 
 
     @Override

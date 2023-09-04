@@ -17,8 +17,8 @@ public class TestCaseApiTests extends BaseApiTest {
     private Case testCase;
     private TestCaseController testCaseController;
 
-    @BeforeMethod(alwaysRun = true)
-    protected void initCase() {
+    @BeforeTest
+    private void initCase() {
         testCaseController = new TestCaseController();
         testCase = Case.builder()
                 .title(TEST_CASE_TITLE)

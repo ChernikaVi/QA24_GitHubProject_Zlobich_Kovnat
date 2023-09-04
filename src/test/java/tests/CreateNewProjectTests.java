@@ -12,7 +12,7 @@ import utils.TestDataGenerator;
 
 public class CreateNewProjectTests extends BaseTest {
     @BeforeMethod(alwaysRun = true)
-    public void loginAndClickCreateProject() {
+    public void logIn() {
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(EMAIL, PASSWORD);

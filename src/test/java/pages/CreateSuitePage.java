@@ -32,6 +32,7 @@ public class CreateSuitePage extends BasePage {
     private By successfullyCreatedSuiteMessage = By.xpath("//*[text()='Suite was successfully created.']");
     private By editedTitle = By.xpath("//*[@data-suite-body-id]");
     private By successfullyDeletedMessageText = By.xpath("//*[text()='Suite was successfully deleted.']");
+    private By badgeLocator = By.cssSelector("#HW_badge");
 
 
 
@@ -76,7 +77,7 @@ public class CreateSuitePage extends BasePage {
 
     @Step
     public void clickEditSuiteButtonIcon() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("HW_badge")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(badgeLocator));
         driver.findElement(editSuiteIconLocator).click();
     }
 
@@ -92,7 +93,7 @@ public class CreateSuitePage extends BasePage {
 
     @Step
     public void clickDeleteSuiteButtonIcon() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("HW_badge")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(badgeLocator));
         driver.findElement(deleteSuiteIconLocator).click();
     }
 

@@ -15,7 +15,7 @@ public class CreateTestCaseTest extends BaseTest {
     private static final String FILE_NAME = "Qase";
     private String filePath = System.getProperty("user.dir") + "/src/test/resources/qase.png";
     @BeforeMethod(alwaysRun = true)
-    public void createNewProject() {
+    public void logIn() {
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(EMAIL, PASSWORD);

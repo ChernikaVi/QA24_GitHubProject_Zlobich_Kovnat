@@ -11,7 +11,7 @@ public class BaseApiTest {
     public final static String PROJECT_DESCRIPTION = "Api tests for Diploma";
     protected DefectController defectController;
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeTest
     public void addProject() {
         QaseProject project = QaseProject.builder()
                 .title(PROJECT_TITLE)
@@ -21,7 +21,7 @@ public class BaseApiTest {
         new ProjectController().addProject(project);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterTest
     public void deleteProject() {
         new ProjectController().deleteProject(PROJECT_CODE);
     }

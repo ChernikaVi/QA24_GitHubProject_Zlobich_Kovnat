@@ -4,15 +4,15 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
+import models.Project;
 import models.Suite;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import utils.TestDataGenerator;
 
 public class CreateNewSuiteTest extends BaseTest {
     @BeforeMethod(alwaysRun = true)
-    public void createNewProject() {
+    public void logIn() {
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(EMAIL, PASSWORD);
