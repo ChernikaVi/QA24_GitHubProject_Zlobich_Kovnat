@@ -1,25 +1,21 @@
 package tests;
 
 import api_tests.BaseApiTest;
-import models.Project;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.*;
 import utils.InvokedListener;
 import utils.PropertyReader;
-import utils.TestDataGenerator;
 
 import java.time.Duration;
 
 @Listeners({InvokedListener.class})
-public abstract class BaseTest {
+public abstract class BaseTest extends BaseApiTest{
     protected static final String BASE_URL = PropertyReader.getProperty("base_url");
     protected static final String EMAIL = PropertyReader.getProperty("email");
     protected static final String PASSWORD = PropertyReader.getProperty("password");

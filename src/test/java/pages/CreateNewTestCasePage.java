@@ -105,9 +105,9 @@ public class CreateNewTestCasePage extends BasePage {
         new DropdownForCase(driver, "Is flaky").chooseDropdownOption(testCase.getIsFlaky().getName());
         new DropdownForCase(driver, "Behavior").chooseDropdownOption(testCase.getBehavior().getName());
         new DropdownForCase(driver, "Automation status").chooseDropdownOption(testCase.getAutomationStatus().getName());
-        new DataPlaceholderForSteps(driver, 1, "Step Action").setDataPlaceholderForStepsValue(testCase.getStepAction());
-        new DataPlaceholderForSteps(driver, 1, "Data").setDataPlaceholderForStepsValue(testCase.getData());
-        new DataPlaceholderForSteps(driver, 1, "Expected result").setDataPlaceholderForStepsValue(testCase.getExpectedResult());
+        new DataPlaceholderForSteps(driver,  "Step Action").setDataPlaceholderForStepsValue(testCase.getStepAction());
+        new DataPlaceholderForSteps(driver,  "Data").setDataPlaceholderForStepsValue(testCase.getData());
+        new DataPlaceholderForSteps(driver,  "Expected result").setDataPlaceholderForStepsValue(testCase.getExpectedResult());
     }
     public void clickAddAttachmentButton(){
         driver.findElement(addAttachmentButtonLocator).click();
