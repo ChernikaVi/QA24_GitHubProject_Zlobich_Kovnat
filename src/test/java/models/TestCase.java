@@ -16,8 +16,11 @@ public class TestCase {
     private String description;
     private String preConditions;
     private String postConditions;
+    @EqualsAndHashCode.Exclude
     private String stepAction;
+    @EqualsAndHashCode.Exclude
     private String data;
+    @EqualsAndHashCode.Exclude
     private String expectedResult;
     private Status status;
     private Severity severity;
@@ -39,9 +42,6 @@ public class TestCase {
                 && Objects.equals(description, aTestCase.description)
                 && Objects.equals(preConditions, aTestCase.preConditions)
                 && Objects.equals(postConditions, aTestCase.postConditions)
-                && Objects.equals(stepAction, aTestCase.stepAction)
-                && Objects.equals(data, aTestCase.data)
-                && Objects.equals(expectedResult, aTestCase.expectedResult)
                 && status == aTestCase.status
                 && severity == aTestCase.severity
                 && priority == aTestCase.priority

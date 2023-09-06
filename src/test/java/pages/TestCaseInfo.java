@@ -13,7 +13,7 @@ public class TestCaseInfo extends BasePage {
     private final static String inputLocator = "//label[text()='%s']/parent::div//following-sibling::div//input";
     private final static String dataPlaceholderLocator = "//label[text()='%s']//parent::div//following-sibling::div//p[@class]";
     private final static String dropdownOptionLocator = "//label[text()='%s']//parent::div//div[@class='_ZTmUa']";
-    private final static String dataPlaceholderForStepsLocator = "//div[@title='%d']//parent::div/parent::div/following-sibling::div//p[text()='%s']//parent::div/parent::div/parent::div/following-sibling::div//p";
+    private final static String dataPlaceholderForStepsLocator = "//div[text()='Test Case Steps']//parent::div/parent::div/parent::div/following-sibling::div//p";
 
 
     private By testCaseLocator = By.xpath("//*[@data-suite-body-id]//descendant::div[@class='WVGvc_ wq7uNh']");
