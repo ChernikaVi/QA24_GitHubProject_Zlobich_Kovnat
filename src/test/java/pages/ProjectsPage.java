@@ -1,11 +1,9 @@
 package pages;
 
 import io.qameta.allure.Step;
-import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.TestDataGenerator;
 
 public class ProjectsPage extends BasePage {
     public ProjectsPage(WebDriver driver) {
