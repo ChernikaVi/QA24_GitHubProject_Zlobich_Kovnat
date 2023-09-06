@@ -15,7 +15,7 @@ public class TestCaseInfo extends BasePage {
     private final static String dropdownOptionLocator = "//label[text()='%s']//parent::div//div[@class='_ZTmUa']";
     private final static String dataPlaceholderForStepsLocator ="//*[@class='case-create-block steps-block']//following::div//following-sibling::div//input[@value='%s']";
 
-    private By testCaseLocator = By.xpath("//*[@data-suite-body-id]//descendant::div[@data-handler-id]//following-sibling::div[4]");
+    private By testCaseLocator = By.xpath("//*[@data-suite-body-id]//parent::div[@data-suite-body-id]//following-sibling::div[4]");
     private By editTestCaseButtonLocator = By.xpath("//*[@class='far fa-window-restore']//following::*[@class='far fa-pencil']");
 
     public TestCaseInfo(WebDriver driver) {
