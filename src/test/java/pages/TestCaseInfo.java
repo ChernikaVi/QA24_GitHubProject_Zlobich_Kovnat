@@ -13,8 +13,7 @@ public class TestCaseInfo extends BasePage {
     private final static String inputLocator = "//label[text()='%s']/parent::div//following-sibling::div//input";
     private final static String dataPlaceholderLocator = "//label[text()='%s']//parent::div//following-sibling::div//p[@class]";
     private final static String dropdownOptionLocator = "//label[text()='%s']//parent::div//div[@class='_ZTmUa']";
-    private final static String dataPlaceholderForStepsLocator = "//div[text()='Test Case Steps']//parent::div/parent::div/parent::div/following-sibling::div//p";
-
+    private final static String dataPlaceholderForStepsLocator ="//*[@class='case-create-block steps-block']//following::div//following-sibling::div//input[@value='%s']";
 
     private By testCaseLocator = By.xpath("//*[@data-suite-body-id]//descendant::div[@class='WVGvc_ wq7uNh']");
     private By editTestCaseButtonLocator = By.xpath("//*[@class='far fa-window-restore']//following::*[@class='far fa-pencil']");
@@ -58,10 +57,11 @@ public class TestCaseInfo extends BasePage {
         return driver.findElement(By.xpath(String.format(dropdownOptionLocator, labelName))).getText();
     }
 
-    public String getDataPlaceholderForStepsValue(int numberOfSteps, String labelName) {
+    public String getDataPlaceholderForStepsValue( String labelName) {
         log.info(String.format("getting value from data placeholder for steps field with label name: %s", labelName));
-        return driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, numberOfSteps, labelName))).getText();
+        return driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, labelName))).getAttribute("value");
     }
+
 
     public TestCase getTestCaseDetails() {
         log.info("getting fields' values from test case edit page");
@@ -70,9 +70,9 @@ public class TestCaseInfo extends BasePage {
         testCase.setDescription(new TestCaseInfo(driver).getDataPlaceholderValue("Description"));
         testCase.setPreConditions(new TestCaseInfo(driver).getDataPlaceholderValue("Pre-conditions"));
         testCase.setPostConditions(new TestCaseInfo(driver).getDataPlaceholderValue("Post-conditions"));
-        testCase.setStepAction(new TestCaseInfo(driver).getDataPlaceholderForStepsValue(1, "Step Action"));
-        testCase.setData(new TestCaseInfo(driver).getDataPlaceholderForStepsValue(1, "Data"));
-        testCase.setExpectedResult(new TestCaseInfo(driver).getDataPlaceholderForStepsValue(1, "Expected result"));
+        testCase.setStepAction(new TestCaseInfo(driver).getDataPlaceholderForStepsValue( "Step Action"));
+        testCase.setData(new TestCaseInfo(driver).getDataPlaceholderForStepsValue( "Data"));
+        testCase.setExpectedResult(new TestCaseInfo(driver).getDataPlaceholderForStepsValue( "Expected result"));
         testCase.setStatus(Status.fromString(getDropdownOptionValue("Status")));
         testCase.setSeverity(Severity.fromString(getDropdownOptionValue("Severity")));
         testCase.setPriority(Priority.fromString(getDropdownOptionValue("Priority")));

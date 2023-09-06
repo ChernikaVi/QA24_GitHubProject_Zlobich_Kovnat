@@ -8,18 +8,17 @@ import org.openqa.selenium.WebElement;
 @Log4j2
 public class DataPlaceholderForSteps extends BaseElement {
 
-    private String dataPlaceholderForStepsLocator = "//div[@class='case-create-block steps-block']//parent::div/parent::div/following-sibling::div//p[@data-placeholder]";
+    private String dataPlaceholderForStepsLocator = "//p[@data-placeholder='%s']";
     private int title;
     private String itemName;
 
-    public DataPlaceholderForSteps(WebDriver driver, int title, String itemName) {
+    public DataPlaceholderForSteps(WebDriver driver, String itemName) {
         super(driver);
-        this.title = title;
         this.itemName = itemName;
     }
 
     public void setDataPlaceholderForStepsValue(String value) {
-        WebElement dataPlaceholder = driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, this.title, this.itemName)));
+        WebElement dataPlaceholder = driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, this.itemName)));
         scrollToElement(dataPlaceholder);
         log.info(String.format("sending the following value: %s", value));
         dataPlaceholder.sendKeys(value);
