@@ -13,9 +13,9 @@ public class TestCaseInfo extends BasePage {
     private final static String inputLocator = "//label[text()='%s']/parent::div//following-sibling::div//input";
     private final static String dataPlaceholderLocator = "//label[text()='%s']//parent::div//following-sibling::div//p[@class]";
     private final static String dropdownOptionLocator = "//label[text()='%s']//parent::div//div[@class='_ZTmUa']";
-    private final static String dataPlaceholderForStepsLocator ="//*[@class='case-create-block steps-block']//following::div//following-sibling::div//input[@value='%s']";
+    private final static String dataPlaceholderForStepsLocator ="(//div[contains(@class,'steps-block')]/following-sibling::div//input)[%s]";
 
-    private By testCaseLocator = By.xpath("//*[@data-suite-body-id]//parent::div[@data-suite-body-id]//following-sibling::div[4]");
+    private String testCaseLocator = "//*[@data-suite-body-id]//parent::div[@data-suite-body-id]//div[text()='%s']";
     private By editTestCaseButtonLocator = By.xpath("//*[@class='far fa-window-restore']//following::*[@class='far fa-pencil']");
 
     public TestCaseInfo(WebDriver driver) {
@@ -32,9 +32,10 @@ public class TestCaseInfo extends BasePage {
         return null;
     }
 
-    @Step
-    public void clickTestCaseButton() {
-        driver.findElement(testCaseLocator).click();
+    public String clickTestCaseButton(String titleOfCase) {
+        log.info(String.format("getting value from dropdown field with label name: %s", titleOfCase));
+        driver.findElement(By.xpath(String.format(testCaseLocator, titleOfCase))).click();
+        return titleOfCase;
     }
 
     @Step
@@ -57,22 +58,21 @@ public class TestCaseInfo extends BasePage {
         return driver.findElement(By.xpath(String.format(dropdownOptionLocator, labelName))).getText();
     }
 
-    public String getDataPlaceholderForStepsValue( String labelName) {
-        log.info(String.format("getting value from data placeholder for steps field with label name: %s", labelName));
-        return driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, labelName))).getAttribute("value");
+    public String getDataPlaceholderForStepsValue(int numberOfSteps) {
+        log.info(String.format("getting value from data placeholder for steps field with label name: %s", numberOfSteps));
+        return driver.findElement(By.xpath(String.format(dataPlaceholderForStepsLocator, numberOfSteps))).getAttribute("value");
     }
-
 
     public TestCase getTestCaseDetails() {
         log.info("getting fields' values from test case edit page");
         TestCase.TestCaseBuilder testCase = new TestCase.TestCaseBuilder();
-        testCase.setTitle(new TestCaseInfo(driver).getInputValue("Title"));
-        testCase.setDescription(new TestCaseInfo(driver).getDataPlaceholderValue("Description"));
+        testCase.setTitle(this.getInputValue("Title"));
+        testCase.setDescription(this.getDataPlaceholderValue("Description"));
         testCase.setPreConditions(new TestCaseInfo(driver).getDataPlaceholderValue("Pre-conditions"));
         testCase.setPostConditions(new TestCaseInfo(driver).getDataPlaceholderValue("Post-conditions"));
-        testCase.setStepAction(new TestCaseInfo(driver).getDataPlaceholderForStepsValue( "Step Action"));
-        testCase.setData(new TestCaseInfo(driver).getDataPlaceholderForStepsValue( "Data"));
-        testCase.setExpectedResult(new TestCaseInfo(driver).getDataPlaceholderForStepsValue( "Expected result"));
+        testCase.setStepAction(new TestCaseInfo(driver).getDataPlaceholderForStepsValue(1));
+        testCase.setData(new TestCaseInfo(driver).getDataPlaceholderForStepsValue(2));
+        testCase.setExpectedResult(new TestCaseInfo(driver).getDataPlaceholderForStepsValue(3));
         testCase.setStatus(Status.fromString(getDropdownOptionValue("Status")));
         testCase.setSeverity(Severity.fromString(getDropdownOptionValue("Severity")));
         testCase.setPriority(Priority.fromString(getDropdownOptionValue("Priority")));

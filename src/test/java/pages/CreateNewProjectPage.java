@@ -26,7 +26,7 @@ public class CreateNewProjectPage extends BasePage {
 
     @Override
     public CreateNewProjectPage openPage() {
-        driver.get("https://app.qase.io");
+        driver.get("https://app.qase.io/projects");
         return this;
     }
 

@@ -26,8 +26,6 @@ public class CreateSuitePage extends BasePage {
     private By allSuites = By.cssSelector("#suitecases-container");
 
 
-    private By createNewProjectButtonLocator = By.cssSelector("#createButton");
-    private By projectTitleLocator = By.xpath("//a[contains(@class,'defect-title')][text()='%s']");
     private By createSuiteButtonLocator = By.cssSelector("#create-suite-button");
     private By successfullyCreatedSuiteMessage = By.xpath("//*[text()='Suite was successfully created.']");
     private By editedTitle = By.xpath("//*[@data-suite-body-id]");
@@ -42,7 +40,7 @@ public class CreateSuitePage extends BasePage {
 
     @Override
     public CreateSuitePage openPage() {
-        driver.get("https://app.qase.io");
+        driver.get("https://app.qase.io/projects");
         return this;
     }
 

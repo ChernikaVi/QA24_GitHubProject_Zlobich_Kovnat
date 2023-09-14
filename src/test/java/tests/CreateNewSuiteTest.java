@@ -4,7 +4,6 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
-import models.Project;
 import models.Suite;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -22,10 +21,10 @@ public class CreateNewSuiteTest extends BaseTest {
     @Description("Create new suite")
     @Link(name = "Create suite page")
     @Severity(SeverityLevel.CRITICAL)
-    public void createNewSuitTest() {
+    public void createNewSuiteTest() {
         Suite suite = TestDataGenerator.addSuiteGeneration();
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle();
+        projectsPage.clickOnProjectTitle(projectTitle);
         createSuitePage.clickCreateSuiteButton();
         createSuitePage.fillingOutSuiteForm(suite);
         createSuitePage.clickCreateNewSuiteButton();
@@ -37,10 +36,10 @@ public class CreateNewSuiteTest extends BaseTest {
     @Description("Edit suite")
     @Link(name = "Create suite page")
     @Severity(SeverityLevel.CRITICAL)
-    public void editSuitTest() {
-        Suite suite = TestDataGenerator.editSuiteGeneration();
+    public void editSuiteTest() {
+        Suite suite = TestDataGenerator.addSuiteGeneration();
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle();
+        projectsPage.clickOnProjectTitle(projectTitle);
         createSuitePage.clickCreateSuiteButton();
         createSuitePage.fillingOutSuiteForm(suite);
         createSuitePage.clickCreateNewSuiteButton();
@@ -54,9 +53,9 @@ public class CreateNewSuiteTest extends BaseTest {
     @Description("Delete suite")
     @Link(name = "Create suite page")
     @Severity(SeverityLevel.CRITICAL)
-    public void deleteSuitTest() {
+    public void deleteSuiteTest() {
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle();
+        projectsPage.clickOnProjectTitle(projectTitle);
         createSuitePage.clickDeleteSuiteButtonIcon();
         createSuitePage.clickDeleteSuiteButton();
         Assert.assertTrue(createSuitePage.successfullyDeletedMessageTextIsDisplayed());

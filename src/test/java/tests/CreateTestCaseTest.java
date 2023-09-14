@@ -28,13 +28,13 @@ public class CreateTestCaseTest extends BaseTest {
     public void positiveCreateNewTestCaseTest() {
         TestCase testCase = TestDataGenerator.createTestCaseGeneration();
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle();
+        projectsPage.clickOnProjectTitle(projectTitle);
         projectsPage.clickCreateNewTestCaseButton();
         createNewTestCasePage.clickAddStepButton();
         createNewTestCasePage.fillingOutTestCaseForm(testCase);
         createNewTestCasePage.clickSaveCaseButton();
         Assert.assertTrue(createNewTestCasePage.successfullyCreatedTestCaseMessageIsDisplayed());
-        testCaseInfo.clickTestCaseButton();
+        testCaseInfo.clickTestCaseButton(testCase.getTitle());
         testCaseInfo.clickTestCaseEditButton();
         TestCase expectedProject = testCaseInfo.getTestCaseDetails();
         Assert.assertEquals(expectedProject, testCase);
@@ -44,7 +44,7 @@ public class CreateTestCaseTest extends BaseTest {
     public void fileUploadTest() {
         TestCase testCase = TestDataGenerator.createTestCaseGeneration();
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle();
+        projectsPage.clickOnProjectTitle(projectTitle);
         projectsPage.clickCreateNewTestCaseButton();
         createNewTestCasePage.clickAddStepButton();
         createNewTestCasePage.fillingOutTestCaseForm(testCase);
@@ -58,4 +58,30 @@ public class CreateTestCaseTest extends BaseTest {
         createNewTestCasePage.clickAvatarButton();
         createNewTestCasePage.clickSignOutButton();
     }
+
+/*    @Test(description = "Creating test case with shared steps", groups = "regression")
+    public void testCaseWithSharedSteps() {
+        TestCase testCase = TestDataGenerator.createTestCaseGeneration();
+        TestCase testCaseWithSharedSteps = TestDataGenerator.createTestCaseGeneration();
+        SharedSteps actualTitle = TestDataGenerator.addSharedStepsGeneration();
+        projectsPage.isPageOpened();
+        projectsPage.clickOnProjectTitle(projectTitle);
+        createNewTestCasePage.clickSharedStepsButton();
+        createNewTestCasePage.clickAddNewSharedStepsButton();
+        createNewTestCasePage.clickAddStepsButton();
+        createNewTestCasePage.setTitleOfSharedSteps(actualTitle);
+        createNewTestCasePage.setSteps(testCase);
+        createNewTestCasePage.clickCreateSharedStepsButton();
+        Assert.assertTrue(createNewTestCasePage.successfullyCreatedSharedStepsMessageIsDisplayed());
+        createNewTestCasePage.clickRepositoryButton();
+
+        projectsPage.clickCreateNewTestCaseButton();
+        createNewTestCasePage.fillingOutTestCaseFormWithSharedSteps(testCase);
+        createNewTestCasePage.clickAddSharedStepsInTestCaseButton();
+        createNewTestCasePage.clickSelectSharedStepsInTestCaseButton();
+        createNewTestCasePage.clickSelectedTitleButton(actualTitle.getTitle());
+
+        createNewTestCasePage.clickSaveCaseButton();
+        Assert.assertTrue(createNewTestCasePage.successfullyCreatedTestCaseMessageIsDisplayed());
+    }*/
 }

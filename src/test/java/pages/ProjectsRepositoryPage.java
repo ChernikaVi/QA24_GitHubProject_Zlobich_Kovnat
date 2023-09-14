@@ -17,7 +17,7 @@ public class ProjectsRepositoryPage extends BasePage{
 
     @Override
     public ProjectsRepositoryPage openPage() {
-        driver.get("https://app.qase.io");
+        driver.get("https://app.qase.io/projects");
         return this;
     }
 

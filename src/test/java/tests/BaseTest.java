@@ -1,6 +1,8 @@
 package tests;
 
-import api_tests.BaseApiTest;
+import controllers.ProjectController;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import models.QaseProject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,8 +16,10 @@ import utils.PropertyReader;
 
 import java.time.Duration;
 
+import static io.restassured.RestAssured.given;
+
 @Listeners({InvokedListener.class})
-public abstract class BaseTest extends BaseApiTest{
+public abstract class BaseTest {
     protected static final String BASE_URL = PropertyReader.getProperty("base_url");
     protected static final String EMAIL = PropertyReader.getProperty("email");
     protected static final String PASSWORD = PropertyReader.getProperty("password");
@@ -36,6 +40,7 @@ public abstract class BaseTest extends BaseApiTest{
     @BeforeClass(alwaysRun = true)
     public void setUp(@Optional("chrome") String browserName, ITestContext context) throws Exception {
         if (browserName.equals("chrome")) {
+            WebDriverManager.chromedriver().clearDriverCache().clearResolutionCache().setup();
             driver = new ChromeDriver();
         } else if (browserName.equals("firefox")) {
             driver = new FirefoxDriver();
@@ -70,5 +75,23 @@ public abstract class BaseTest extends BaseApiTest{
         driver.manage().deleteAllCookies();
         ((JavascriptExecutor) driver).executeScript(String.format("window.localStorage.clear();"));
         ((JavascriptExecutor) driver).executeScript(String.format("window.sessionStorage.clear();"));
+    }
+    public final static String projectTitle = "Qase UI Tests";
+    public final static String projectCode = "QAUI55";
+    public final static String projectDescription = "UI tests for Diploma";
+
+    @BeforeTest
+    public void addProject() {
+        QaseProject project = QaseProject.builder()
+                .title(projectTitle)
+                .code(projectCode)
+                .description(projectDescription)
+                .build();
+        new ProjectController().addProject(project);
+    }
+
+    @AfterTest
+    public void deleteProject() {
+        new ProjectController().deleteProject(projectCode);
     }
 }

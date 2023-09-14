@@ -1,10 +1,11 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
+@Log4j2
 public class ProjectsPage extends BasePage {
     public ProjectsPage(WebDriver driver) {
         super(driver);
@@ -12,12 +13,12 @@ public class ProjectsPage extends BasePage {
 
     private By createNewProjectButtonLocator = By.cssSelector("#createButton");
     private By createProjectFormLocator = By.cssSelector(".ReactModal__Content");
-    private By projectTitleLocator = By.xpath("//a[contains(@class,'defect-title')]");
+    private String projectTitleLocator = "//a[contains(@class,'defect-title')][text()='%s']";
     private By createNewTestCaseButtonLocator = By.cssSelector("#create-case-button");
 
     @Override
     public ProjectsPage openPage() {
-        driver.get("https://app.qase.io");
+        driver.get("https://app.qase.io/projects");
         return this;
     }
 
@@ -43,8 +44,9 @@ public class ProjectsPage extends BasePage {
     }
 
     @Step
-    public void clickOnProjectTitle(){
-        driver.findElement(projectTitleLocator).click();
+    public void clickOnProjectTitle(String titleName){
+       log.info(String.format("clicking on projects title with name: %s", titleName));
+       driver.findElement(By.xpath(String.format(projectTitleLocator, titleName))).click();
     }
 
     @Step
