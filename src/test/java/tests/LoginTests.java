@@ -1,6 +1,5 @@
 package tests;
 
-import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
@@ -14,7 +13,6 @@ public class LoginTests extends BaseTest{
 
     @Test(groups = {"smoke"})
     @Description("Test Log In Form")
-    @Link(name = "Log In Page")
     @Severity(SeverityLevel.CRITICAL)
     public void positiveLogInTest() {
         loginPage.openPage()

@@ -3,6 +3,7 @@ package utils;
 import com.github.javafaker.Faker;
 import enums.*;
 import models.Project;
+import models.SharedSteps;
 import models.Suite;
 import models.TestCase;
 
@@ -20,7 +21,7 @@ public class TestDataGenerator {
     public static Project negativeAddProjectGeneration() {
         return Project.builder()
                 .setName("")
-                .setCode("5555")
+                .setCode(String.valueOf(faker.number().randomDigit()))
                 .setDescription(faker.currency().name() + faker.number().randomDigit())
                 .build();
     }
@@ -33,20 +34,12 @@ public class TestDataGenerator {
                 .build();
     }
 
-    public static Suite editSuiteGeneration() {
-        return Suite.builder()
-                .setSuiteTitle(faker.country().name() + faker.number().randomDigit())
-                .setSuiteDescription(faker.app().version())
-                .setPreconditions(faker.app().version())
-                .build();
-    }
-
     public static TestCase createTestCaseGeneration() {
         return TestCase.builder()
-                .setTitle("Authorization")
-                .setDescription("We can authorize on page qase.io")
-                .setPreConditions("Pre-conditions")
-                .setPostConditions("Post-conditions")
+                .setTitle(faker.animal().name())
+                .setDescription(faker.book().author())
+                .setPreConditions(faker.funnyName().name())
+                .setPostConditions(faker.funnyName().name())
                 .setStatus(Status.ACTUAL)
                 .setSeverity(Severity.CRITICAL)
                 .setPriority(Priority.HIGH)
@@ -55,9 +48,30 @@ public class TestDataGenerator {
                 .setIsFlaky(IsFlaky.NO)
                 .setBehavior(Behavior.POSITIVE)
                 .setAutomationStatus(AutomationStatus.AUTOMATED)
-                .setStepAction("Step Action")
-                .setData("Data")
-                .setExpectedResult("Expected result")
+                .setStepAction(faker.friends().character())
+                .setData(faker.friends().character())
+                .setExpectedResult(faker.friends().character())
+                .build();
+    }
+    public static TestCase createNewTestCaseWithSharedStepsGeneration() {
+        return TestCase.builder()
+                .setTitle(faker.animal().name())
+                .setDescription(faker.book().author())
+                .setPreConditions(faker.funnyName().name())
+                .setPostConditions(faker.funnyName().name())
+                .setStatus(Status.ACTUAL)
+                .setSeverity(Severity.CRITICAL)
+                .setPriority(Priority.HIGH)
+                .setType(Type.FUNCTIONAL)
+                .setLayer(Layer.E2E)
+                .setIsFlaky(IsFlaky.NO)
+                .setBehavior(Behavior.POSITIVE)
+                .setAutomationStatus(AutomationStatus.AUTOMATED)
+                .build();
+    }
+    public static SharedSteps addSharedStepsGeneration() {
+        return SharedSteps.builder()
+                .setTitle(faker.country().name())
                 .build();
     }
 }

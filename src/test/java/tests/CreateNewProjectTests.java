@@ -1,6 +1,5 @@
 package tests;
 
-import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
@@ -21,7 +20,6 @@ public class CreateNewProjectTests extends BaseTest {
 
     @Test(groups = {"smoke"})
     @Description("Positive test form of creating a project")
-    @Link(name = "Create new project Page")
     @Severity(SeverityLevel.CRITICAL)
     public void createNewProjectPositiveTest() {
         Project actualProject = TestDataGenerator.positiveAddProjectGeneration();
@@ -35,7 +33,6 @@ public class CreateNewProjectTests extends BaseTest {
 
     @Test(groups = {"smoke"})
     @Description("Negative test form of creating a project")
-    @Link(name = "Crate new project page")
     @Severity(SeverityLevel.CRITICAL)
     public void createNewProjectNegativeTest() {
         Project actualProject = TestDataGenerator.negativeAddProjectGeneration();
