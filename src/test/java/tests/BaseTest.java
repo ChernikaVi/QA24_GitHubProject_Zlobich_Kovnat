@@ -23,6 +23,9 @@ public abstract class BaseTest {
     protected static final String BASE_URL = PropertyReader.getProperty("base_url");
     protected static final String EMAIL = PropertyReader.getProperty("email");
     protected static final String PASSWORD = PropertyReader.getProperty("password");
+    public final static String PROJECT_TITLE = "Qase UI Tests";
+    public final static String PROJECT_CODE = "QAUI55";
+    public final static String PROJECT_DESCRIPTION = "UI tests for Diploma";
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -40,7 +43,6 @@ public abstract class BaseTest {
     @BeforeClass(alwaysRun = true)
     public void setUp(@Optional("chrome") String browserName, ITestContext context) throws Exception {
         if (browserName.equals("chrome")) {
-            WebDriverManager.chromedriver().clearDriverCache().clearResolutionCache().setup();
             driver = new ChromeDriver();
         } else if (browserName.equals("firefox")) {
             driver = new FirefoxDriver();
@@ -76,22 +78,19 @@ public abstract class BaseTest {
         ((JavascriptExecutor) driver).executeScript(String.format("window.localStorage.clear();"));
         ((JavascriptExecutor) driver).executeScript(String.format("window.sessionStorage.clear();"));
     }
-    public final static String projectTitle = "Qase UI Tests";
-    public final static String projectCode = "QAUI55";
-    public final static String projectDescription = "UI tests for Diploma";
 
     @BeforeTest
     public void addProject() {
         QaseProject project = QaseProject.builder()
-                .title(projectTitle)
-                .code(projectCode)
-                .description(projectDescription)
+                .title(PROJECT_TITLE)
+                .code(PROJECT_CODE)
+                .description(PROJECT_DESCRIPTION)
                 .build();
         new ProjectController().addProject(project);
     }
 
     @AfterTest
     public void deleteProject() {
-        new ProjectController().deleteProject(projectCode);
+        new ProjectController().deleteProject(PROJECT_CODE);
     }
 }

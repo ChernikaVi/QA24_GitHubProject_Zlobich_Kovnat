@@ -6,6 +6,7 @@ import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.PropertyReader;
 
 @Log4j2
 public class ProjectSettingsPage extends BasePage{
@@ -16,7 +17,7 @@ public class ProjectSettingsPage extends BasePage{
 
     @Override
     public ProjectSettingsPage openPage() {
-        driver.get("https://app.qase.io/projects");
+        driver.get(PropertyReader.getProperty("base_url"));
         return this;
     }
 

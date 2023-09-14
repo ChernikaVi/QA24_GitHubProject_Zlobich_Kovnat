@@ -4,6 +4,7 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
+import models.SharedSteps;
 import models.TestCase;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -28,7 +29,7 @@ public class CreateTestCaseTest extends BaseTest {
     public void positiveCreateNewTestCaseTest() {
         TestCase testCase = TestDataGenerator.createTestCaseGeneration();
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle(projectTitle);
+        projectsPage.clickOnProjectTitle(PROJECT_TITLE);
         projectsPage.clickCreateNewTestCaseButton();
         createNewTestCasePage.clickAddStepButton();
         createNewTestCasePage.fillingOutTestCaseForm(testCase);
@@ -44,7 +45,7 @@ public class CreateTestCaseTest extends BaseTest {
     public void fileUploadTest() {
         TestCase testCase = TestDataGenerator.createTestCaseGeneration();
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle(projectTitle);
+        projectsPage.clickOnProjectTitle(PROJECT_TITLE);
         projectsPage.clickCreateNewTestCaseButton();
         createNewTestCasePage.clickAddStepButton();
         createNewTestCasePage.fillingOutTestCaseForm(testCase);
@@ -59,29 +60,30 @@ public class CreateTestCaseTest extends BaseTest {
         createNewTestCasePage.clickSignOutButton();
     }
 
-/*    @Test(description = "Creating test case with shared steps", groups = "regression")
+    @Test(description = "Creating test case with shared steps", groups = "regression")
     public void testCaseWithSharedSteps() {
-        TestCase testCase = TestDataGenerator.createTestCaseGeneration();
-        TestCase testCaseWithSharedSteps = TestDataGenerator.createTestCaseGeneration();
-        SharedSteps actualTitle = TestDataGenerator.addSharedStepsGeneration();
+        TestCase testCaseWithSharedSteps = TestDataGenerator.createNewTestCaseWithSharedStepsGeneration();
+        SharedSteps sharedStepsData = TestDataGenerator.addSharedStepsGeneration();
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle(projectTitle);
+        projectsPage.clickOnProjectTitle(PROJECT_TITLE);
         createNewTestCasePage.clickSharedStepsButton();
         createNewTestCasePage.clickAddNewSharedStepsButton();
         createNewTestCasePage.clickAddStepsButton();
-        createNewTestCasePage.setTitleOfSharedSteps(actualTitle);
-        createNewTestCasePage.setSteps(testCase);
+        createNewTestCasePage.setTitleOfSharedSteps(sharedStepsData);
+        createNewTestCasePage.setSteps(sharedStepsData);
         createNewTestCasePage.clickCreateSharedStepsButton();
         Assert.assertTrue(createNewTestCasePage.successfullyCreatedSharedStepsMessageIsDisplayed());
         createNewTestCasePage.clickRepositoryButton();
 
         projectsPage.clickCreateNewTestCaseButton();
-        createNewTestCasePage.fillingOutTestCaseFormWithSharedSteps(testCase);
+        createNewTestCasePage.fillingOutTestCaseFormWithSharedSteps(testCaseWithSharedSteps);
         createNewTestCasePage.clickAddSharedStepsInTestCaseButton();
         createNewTestCasePage.clickSelectSharedStepsInTestCaseButton();
-        createNewTestCasePage.clickSelectedTitleButton(actualTitle.getTitle());
-
+        createNewTestCasePage.clickSelectedTitleButton(sharedStepsData.getTitle());
+        createNewTestCasePage.clickAddButton();
         createNewTestCasePage.clickSaveCaseButton();
-        Assert.assertTrue(createNewTestCasePage.successfullyCreatedTestCaseMessageIsDisplayed());
-    }*/
+        testCaseInfo.clickTestCaseButton(testCaseWithSharedSteps.getTitle());
+        testCaseInfo.clickTestCaseEditButton();
+        createNewTestCasePage.getDataForSharedSteps();
+    }
 }

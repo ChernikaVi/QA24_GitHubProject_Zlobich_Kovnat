@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.PropertyReader;
 
 @Log4j2
 public class LoginPage extends BasePage {
@@ -23,7 +24,7 @@ public class LoginPage extends BasePage {
 
     @Override
     public LoginPage openPage() {
-        driver.get("https://app.qase.io");
+        driver.get(PropertyReader.getProperty("base_url"));
         return this;
     }
 

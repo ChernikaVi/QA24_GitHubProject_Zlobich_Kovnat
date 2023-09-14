@@ -24,7 +24,7 @@ public class CreateNewSuiteTest extends BaseTest {
     public void createNewSuiteTest() {
         Suite suite = TestDataGenerator.addSuiteGeneration();
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle(projectTitle);
+        projectsPage.clickOnProjectTitle(PROJECT_TITLE);
         createSuitePage.clickCreateSuiteButton();
         createSuitePage.fillingOutSuiteForm(suite);
         createSuitePage.clickCreateNewSuiteButton();
@@ -39,7 +39,7 @@ public class CreateNewSuiteTest extends BaseTest {
     public void editSuiteTest() {
         Suite suite = TestDataGenerator.addSuiteGeneration();
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle(projectTitle);
+        projectsPage.clickOnProjectTitle(PROJECT_TITLE);
         createSuitePage.clickCreateSuiteButton();
         createSuitePage.fillingOutSuiteForm(suite);
         createSuitePage.clickCreateNewSuiteButton();
@@ -55,7 +55,7 @@ public class CreateNewSuiteTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void deleteSuiteTest() {
         projectsPage.isPageOpened();
-        projectsPage.clickOnProjectTitle(projectTitle);
+        projectsPage.clickOnProjectTitle(PROJECT_TITLE);
         createSuitePage.clickDeleteSuiteButtonIcon();
         createSuitePage.clickDeleteSuiteButton();
         Assert.assertTrue(createSuitePage.successfullyDeletedMessageTextIsDisplayed());

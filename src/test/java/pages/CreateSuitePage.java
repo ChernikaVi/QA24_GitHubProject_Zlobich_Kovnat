@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.PropertyReader;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class CreateSuitePage extends BasePage {
 
     @Override
     public CreateSuitePage openPage() {
-        driver.get("https://app.qase.io/projects");
+        driver.get(PropertyReader.getProperty("base_url"));
         return this;
     }
 
