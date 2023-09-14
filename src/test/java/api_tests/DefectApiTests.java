@@ -1,9 +1,11 @@
 package api_tests;
 
 import controllers.DefectController;
+import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import models.Defect;
 import models.DefectResponse;
+import models.Result;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import enums.DefectSeverity;
@@ -23,7 +25,7 @@ public class DefectApiTests extends BaseApiTest {
         Defect defect = Defect.builder()
                 .title(DEFECT_TITLE)
                 .severity(DefectSeverity.MAJOR.getIntValue())
-                .actual_result(DEFECT_RESULT)
+                .actualResult(DEFECT_RESULT)
                 .build();
 
         Response response = defectController.addDefect(PROJECT_CODE, defect);
@@ -39,7 +41,7 @@ public class DefectApiTests extends BaseApiTest {
         Defect newDefect = Defect.builder()
                 .title(DEFECT_TITLE)
                 .severity(DefectSeverity.MAJOR.getIntValue())
-                .actual_result(DEFECT_RESULT)
+                .actualResult(DEFECT_RESULT)
                 .build();
 
         Response defectResponse = defectController
@@ -62,7 +64,7 @@ public class DefectApiTests extends BaseApiTest {
         DefectResponse expectedDefect = DefectResponse.builder()
                 .id(defectId)
                 .title(DEFECT_TITLE)
-                .actual_result(DEFECT_RESULT)
+                .actualResult(DEFECT_RESULT)
                 .severity(DefectSeverity.MAJOR.getStringValue())
                 .build();
 
@@ -71,8 +73,8 @@ public class DefectApiTests extends BaseApiTest {
 
         DefectResponse actualDefect = response
                 .getBody()
-                .jsonPath()
-                .getObject("result", DefectResponse.class);
+                .as(Result.class, ObjectMapperType.GSON)
+                .getDefectResponse();
 
         assertEquals(actualDefect, expectedDefect);
     }
@@ -82,14 +84,14 @@ public class DefectApiTests extends BaseApiTest {
         Defect updatedDefect = Defect.builder()
                 .title(NEW_DEFECT_TITLE)
                 .id(defectId)
-                .actual_result(DEFECT_RESULT)
+                .actualResult(DEFECT_RESULT)
                 .severity(DefectSeverity.MAJOR.getIntValue())
                 .build();
 
         DefectResponse expectedUpdatedDefect = DefectResponse.builder()
                 .id(defectId)
                 .title(NEW_DEFECT_TITLE)
-                .actual_result(DEFECT_RESULT)
+                .actualResult(DEFECT_RESULT)
                 .severity(DefectSeverity.MAJOR.getStringValue())
                 .build();
 
@@ -103,8 +105,8 @@ public class DefectApiTests extends BaseApiTest {
         Response response = defectController.getDefect(PROJECT_CODE, defectId);
         DefectResponse actualUpdatedDefect = response
                 .getBody()
-                .jsonPath()
-                .getObject("result", DefectResponse.class);
+                .as(Result.class, ObjectMapperType.GSON)
+                .getDefectResponse();
 
         assertEquals(actualUpdatedDefect, expectedUpdatedDefect);
     }

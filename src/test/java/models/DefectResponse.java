@@ -18,7 +18,7 @@ public class DefectResponse {
     @SerializedName("title")
     private String title;
     @SerializedName("actual_result")
-    private String actual_result;
+    private String actualResult;
     @SerializedName("severity")
     private String severity;
 }

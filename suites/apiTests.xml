@@ -2,11 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="API Test">
     <test name="By group">
-        <groups>
-            <run>
-                <include name="api"/>
-            </run>
-        </groups>
         <packages>
             <package name="api_tests"/>
         </packages>
