@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import enums.*;
 import models.Project;
 import models.SharedSteps;
+import models.SharedSteps;
 import models.Suite;
 import models.TestCase;
 
@@ -72,6 +73,9 @@ public class TestDataGenerator {
     public static SharedSteps addSharedStepsGeneration() {
         return SharedSteps.builder()
                 .setTitle(faker.country().name())
+                .setStepAction(faker.friends().character())
+                .setData(faker.friends().character())
+                .setExpectedResult(faker.friends().character())
                 .build();
     }
 }

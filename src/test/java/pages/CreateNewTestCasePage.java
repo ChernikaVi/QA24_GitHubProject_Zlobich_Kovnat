@@ -31,10 +31,11 @@ public class CreateNewTestCasePage extends BasePage {
     private By createSharedStepsButtonLocator = By.xpath("//*[@type='submit']");
     private By successfullyCreatedSharedStepsMessage = By.xpath("//*[text()='Shared step was created successfully!']");
     private By repositoryButtonLocator = By.xpath("//*[text()='Repository']");
-    private By sharedStepsInTestCaseLocator = By.xpath("//*[text()='2']//following::*[@class='toastui-editor-contents']");
     private By addSharedStepsInTestCaseButtonLocator = By.xpath("//*[text()=' Add shared step']");
     private By selectSharedStepsButtonLocator = By.xpath("//*[text()='Choose shared step']//following::*[@class='svg-inline--fa fa-caret-down _2ZdXF']");
-    private String selectedTitleOfSharedStepsLocator = "(//*[text()='Choose shared step']//following::input[@placeholder]//following::div";
+    private String selectedTitleOfSharedStepsLocator = "//div[@class]//parent::div[text()= '%s']";
+    private By addButtonLocator = By.xpath("//*[text()='Add']");
+    private String savedValuesForStepsLocator = "(//*[@class]//parent::p)[%s]";
 
 
 
@@ -74,13 +75,13 @@ public class CreateNewTestCasePage extends BasePage {
 
     @Step
     public void clickAddNewSharedStepsButton() {
-        log.info("clicking add shared steps button");
+        log.info("clicking add new shared steps button");
         driver.findElement(addNewStepsButtonLocator).click();
     }
 
     @Step
     public void clickAddStepsButton() {
-        log.info("clicking add shared steps button");
+        log.info("clicking add steps button");
         driver.findElement(addStepsButtonLocator).click();
     }
 
@@ -89,17 +90,13 @@ public class CreateNewTestCasePage extends BasePage {
         driver.findElement(sharedStepTitleIdLocator).sendKeys(sharedSteps.getTitle());
     }
 
-    @Step
-    public void clickOnTitleOfSharedSteps() {
-        driver.findElement(sharedStepTitleIdLocator).sendKeys("My Steps");
-    }
 
     @Step
-    public void setSteps(TestCase testCase) {
+    public void setSteps(SharedSteps sharedSteps) {
         log.info("Filling values into the create new test case page");
-        new DataPlaceholderForSteps(driver,  "Step Action").setDataPlaceholderForStepsValue(testCase.getStepAction());
-        new DataPlaceholderForSteps(driver,  "Data").setDataPlaceholderForStepsValue(testCase.getData());
-        new DataPlaceholderForSteps(driver,  "Expected result").setDataPlaceholderForStepsValue(testCase.getExpectedResult());
+        new DataPlaceholderForSteps(driver,  "Step Action").setDataPlaceholderForStepsValue(sharedSteps.getStepAction());
+        new DataPlaceholderForSteps(driver,  "Data").setDataPlaceholderForStepsValue(sharedSteps.getData());
+        new DataPlaceholderForSteps(driver,  "Expected result").setDataPlaceholderForStepsValue(sharedSteps.getExpectedResult());
     }
 
     @Step
@@ -120,20 +117,40 @@ public class CreateNewTestCasePage extends BasePage {
 
     @Step
     public void clickAddSharedStepsInTestCaseButton() {
-        log.info("clicking repository button");
+        log.info("clicking add shared steps in test case button");
         driver.findElement(addSharedStepsInTestCaseButtonLocator).click();
     }
 
     @Step
     public void clickSelectSharedStepsInTestCaseButton() {
-        log.info("clicking repository button");
+        log.info("clicking select button");
         driver.findElement(selectSharedStepsButtonLocator).click();
     }
 
     @Step
     public void clickSelectedTitleButton(String titleName){
         log.info(String.format("clicking on selected title: %s", titleName));
-        driver.findElement(By.xpath(String.format(titleName, selectedTitleOfSharedStepsLocator))).click();
+        driver.findElement(By.xpath(String.format(selectedTitleOfSharedStepsLocator, titleName))).click();
+    }
+
+    @Step
+    public void clickAddButton() {
+        log.info("clicking add button");
+        driver.findElement(addButtonLocator).click();
+    }
+
+    public String getSavedValuesForSteps(int numberOfSharedSteps) {
+        log.info(String.format("getting value from steps field with number: %s", numberOfSharedSteps));
+        return driver.findElement(By.xpath(String.format(savedValuesForStepsLocator, numberOfSharedSteps))).getText();
+    }
+
+    public SharedSteps.SharedStepsBuilder getDataForSharedSteps() {
+        log.info("getting value from data placeholder for steps field with label name");
+        SharedSteps.SharedStepsBuilder sharedSteps = new SharedSteps.SharedStepsBuilder();
+        sharedSteps.setStepAction(this.getSavedValuesForSteps(1));
+        sharedSteps.setData(this.getSavedValuesForSteps(2));
+        sharedSteps.setExpectedResult(this.getSavedValuesForSteps(3));
+        return SharedSteps.builder();
     }
 
 
@@ -145,7 +162,7 @@ public class CreateNewTestCasePage extends BasePage {
 
     @Step
     public void clickCancelAllertButton() {
-        log.info("clicking cancel test case button");
+        log.info("clicking cancel allert button");
         driver.findElement(cancelAllertButtonLocator).click();
     }
 
@@ -157,7 +174,7 @@ public class CreateNewTestCasePage extends BasePage {
 
     @Step
     public void clickSignOutButton() {
-        log.info("clicking Sign Out button");
+        log.info("clicking sign Out button");
         driver.findElement(signOutButtonLocator).click();
     }
 
@@ -197,19 +214,7 @@ public class CreateNewTestCasePage extends BasePage {
     public void fillingOutTestCaseFormWithSharedSteps(TestCase testCase) {
         log.info("Filling values into the create new test case page");
         new Input(driver, "Title").setInputValue(testCase.getTitle());
-        new DataPlaceholder(driver, "Description").setDataPlaceholderValue(testCase.getDescription());
-        new DataPlaceholder(driver, "Pre-conditions").setDataPlaceholderValue(testCase.getPreConditions());
-        new DataPlaceholder(driver, "Post-conditions").setDataPlaceholderValue(testCase.getPostConditions());
-        new DropdownForCase(driver, "Status").chooseDropdownOption(testCase.getStatus().getName());
-        new DropdownForCase(driver, "Severity").chooseDropdownOption(testCase.getSeverity().getName());
-        new DropdownForCase(driver, "Priority").chooseDropdownOption(testCase.getPriority().getName());
-        new DropdownForCase(driver, "Type").chooseDropdownOption(testCase.getType().getName());
-        new DropdownForCase(driver, "Layer").chooseDropdownOption(testCase.getLayer().getName());
-        new DropdownForCase(driver, "Is flaky").chooseDropdownOption(testCase.getIsFlaky().getName());
-        new DropdownForCase(driver, "Behavior").chooseDropdownOption(testCase.getBehavior().getName());
-        new DropdownForCase(driver, "Automation status").chooseDropdownOption(testCase.getAutomationStatus().getName());
     }
-
 
     public void clickAddAttachmentButton(){
         driver.findElement(addAttachmentButtonLocator).click();

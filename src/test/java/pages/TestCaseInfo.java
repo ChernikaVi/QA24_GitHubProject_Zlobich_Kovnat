@@ -68,11 +68,11 @@ public class TestCaseInfo extends BasePage {
         TestCase.TestCaseBuilder testCase = new TestCase.TestCaseBuilder();
         testCase.setTitle(this.getInputValue("Title"));
         testCase.setDescription(this.getDataPlaceholderValue("Description"));
-        testCase.setPreConditions(new TestCaseInfo(driver).getDataPlaceholderValue("Pre-conditions"));
-        testCase.setPostConditions(new TestCaseInfo(driver).getDataPlaceholderValue("Post-conditions"));
-        testCase.setStepAction(new TestCaseInfo(driver).getDataPlaceholderForStepsValue(1));
-        testCase.setData(new TestCaseInfo(driver).getDataPlaceholderForStepsValue(2));
-        testCase.setExpectedResult(new TestCaseInfo(driver).getDataPlaceholderForStepsValue(3));
+        testCase.setPreConditions(this.getDataPlaceholderValue("Pre-conditions"));
+        testCase.setPostConditions(this.getDataPlaceholderValue("Post-conditions"));
+        testCase.setStepAction(this.getDataPlaceholderForStepsValue(1));
+        testCase.setData(this.getDataPlaceholderForStepsValue(2));
+        testCase.setExpectedResult(this.getDataPlaceholderForStepsValue(3));
         testCase.setStatus(Status.fromString(getDropdownOptionValue("Status")));
         testCase.setSeverity(Severity.fromString(getDropdownOptionValue("Severity")));
         testCase.setPriority(Priority.fromString(getDropdownOptionValue("Priority")));
