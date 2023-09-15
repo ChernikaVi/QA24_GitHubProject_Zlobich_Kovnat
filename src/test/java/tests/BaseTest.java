@@ -79,7 +79,7 @@ public abstract class BaseTest {
         ((JavascriptExecutor) driver).executeScript(String.format("window.sessionStorage.clear();"));
     }
 
-    @BeforeTest
+    @BeforeTest(alwaysRun = true)
     public void addProject() {
         QaseProject project = QaseProject.builder()
                 .title(PROJECT_TITLE)
@@ -89,7 +89,7 @@ public abstract class BaseTest {
         new ProjectController().addProject(project);
     }
 
-    @AfterTest
+    @AfterTest(alwaysRun = true)
     public void deleteProject() {
         new ProjectController().deleteProject(PROJECT_CODE);
     }
