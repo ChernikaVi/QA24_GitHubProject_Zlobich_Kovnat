@@ -5,7 +5,7 @@ import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import models.Defect;
 import models.DefectResponse;
-import models.Result;
+import models.DefectResult;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import enums.DefectSeverity;
@@ -73,7 +73,7 @@ public class DefectApiTests extends BaseApiTest {
 
         DefectResponse actualDefect = response
                 .getBody()
-                .as(Result.class, ObjectMapperType.GSON)
+                .as(DefectResult.class, ObjectMapperType.GSON)
                 .getDefectResponse();
 
         assertEquals(actualDefect, expectedDefect);
@@ -105,7 +105,7 @@ public class DefectApiTests extends BaseApiTest {
         Response response = defectController.getDefect(PROJECT_CODE, defectId);
         DefectResponse actualUpdatedDefect = response
                 .getBody()
-                .as(Result.class, ObjectMapperType.GSON)
+                .as(DefectResult.class, ObjectMapperType.GSON)
                 .getDefectResponse();
 
         assertEquals(actualUpdatedDefect, expectedUpdatedDefect);

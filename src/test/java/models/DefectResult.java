@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Result {
+public class DefectResult {
     @SerializedName("result")
     private DefectResponse defectResponse;
 
